@@ -1,0 +1,71 @@
+﻿.umb-node-preview,
+.umb-node-preview-add {
+    max-width: 100%;
+}
+
+/* Fade unpublished items */
+.umb-node-preview--unpublished {
+    opacity: .5;
+
+    + .angular-ui-tree-nodes {
+        opacity: .5;
+    }
+}
+
+/* Angular UI Tree */
+.angular-ui-tree-nodes {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    // sometimes the cursor disappears
+    a:link[data-nodrag] {
+        cursor: pointer;
+    }
+
+    // indent children
+    .angular-ui-tree-nodes {
+        padding-left: 20px;
+    }
+}
+
+.angular-ui-tree-hidden {
+    display: none;
+}
+
+.angular-ui-tree-node,
+.angular-ui-tree-placeholder {
+    line-height: 20px;
+    position: relative;
+    min-height: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+
+.angular-ui-tree-placeholder {
+    background: #f8f8f8;
+    min-height: 30px;
+    margin: 5px 0;
+    padding: 0;
+    border: 2px dashed #d9d9d9;
+    box-sizing: border-box;
+    opacity: .5;
+}
+
+.angular-ui-tree-handle {
+    line-height: 20px;
+    min-height: 20px;
+    padding: 10px 15px;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: move;
+}
+
+.angular-ui-tree-drag {
+    position: absolute;
+    opacity: .8;
+    pointer-events: none;
+    z-index: 999;
+}

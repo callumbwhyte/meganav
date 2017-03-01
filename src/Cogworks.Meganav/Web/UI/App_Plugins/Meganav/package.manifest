@@ -1,0 +1,11 @@
+﻿{
+  "javascript": [
+    "~/App_Plugins/Meganav/js/meganav.controller.js",
+    "~/App_Plugins/Meganav/js/meganav.resource.js",
+    "~/App_Plugins/Meganav/js/angular-ui-tree.js"
+  ],
+  "css": [
+    "~/App_Plugins/Meganav/css/umb-node-preview.css",
+    "~/App_Plugins/Meganav/css/editor.css"
+  ]
+}
