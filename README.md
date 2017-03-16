@@ -1,6 +1,6 @@
 # Umbraco Meganav
 
-[![Build status](https://ci.appveyor.com/api/projects/status/tst3ega0p7v8x58h/branch/master?svg=true)](https://ci.appveyor.com/project/mzajkowski/meganav/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/xi37v81yqo7vhg4d/branch/master?svg=true)](https://ci.appveyor.com/project/Cogworks/meganav/branch/master)
 [![NuGet release](https://img.shields.io/nuget/v/Cogworks.Meganav.svg)](https://www.nuget.org/packages/Cogworks.Meganav)
 [![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.org/projects/website-utilities/meganav/)
 
