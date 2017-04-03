@@ -4,6 +4,7 @@ using System.Linq;
 using Cogworks.Meganav.Enums;
 using Cogworks.Meganav.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;

@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Enums\MeganavItem.cs" />
+    <Compile Include="Converters\DictionaryConverter.cs" />
     <Compile Include="Models\MeganavItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyEditors\MeganavPropertyEditor.cs" />

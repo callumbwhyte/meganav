@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using Cogworks.Meganav.Converters;
 using Cogworks.Meganav.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Umbraco.Core.Models;
 
 namespace Cogworks.Meganav.Models
@@ -14,6 +16,7 @@ namespace Cogworks.Meganav.Models
         public string Target { get; set; }
 
         public string Url { get; set; }
+        [JsonConverter(typeof(DictionaryConverter))]
         public IDictionary<string, object> Config { get; set; }
 
         [JsonIgnore]
