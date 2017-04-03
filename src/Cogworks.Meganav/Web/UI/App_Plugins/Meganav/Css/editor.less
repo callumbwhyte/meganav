@@ -12,6 +12,21 @@
     }
 }
 
+/* Fade unpublished items and add red border to show difference with unpublished items */
+.umb-node-preview--navihide {
+    opacity: .5;
+    border: 1px dotted red;
+
+    + .angular-ui-tree-nodes {
+        opacity: .5;
+    }
+}
+
+/* Fade unpublished items and add red border to show difference with unpublished items on hover as well */
+.umb-node-preview--sortable.umb-node-preview--navihide:hover {
+    border-color: red;
+}
+
 /* Angular UI Tree */
 .angular-ui-tree-nodes {
     position: relative;

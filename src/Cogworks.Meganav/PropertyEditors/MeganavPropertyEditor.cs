@@ -1,4 +1,5 @@
-﻿using Umbraco.Core.PropertyEditors;
+﻿using System.Collections.Generic;
+using Umbraco.Core.PropertyEditors;
 
 namespace Cogworks.Meganav.PropertyEditors
 {
@@ -14,6 +15,9 @@ namespace Cogworks.Meganav.PropertyEditors
         {
             [PreValueField("maxDepth", "Max Depth", "number")]
             public string MaxDepth { get; set; }
+
+            [PreValueField("settings", "Settings", "~/App_Plugins/Meganav/Views/prevalue-editor.html")]
+            public IEnumerable<PreValueField> Settings { get; set; }
         }
     }
 }

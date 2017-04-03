@@ -19,7 +19,8 @@ namespace Cogworks.Meganav.Web.Controllers.API
                     title = entity.Name,
                     icon = entity.ContentType.Icon,
                     url = Umbraco.Url(entity.Id),
-                    published = entity.Published
+                    published = entity.Published,
+                    navihide = entity.GetValue<bool>("umbracoNaviHide")
                 });
             }
 

@@ -55,8 +55,13 @@
       <DependentUpon>umb-node-preview.less</DependentUpon>
     </Content>
     <Content Include="Web\UI\App_Plugins\Meganav\Js\angular-ui-tree.js" />
+    <Content Include="Web\UI\App_Plugins\Meganav\Js\meganav.prevaule.controller.js" />
     <Content Include="Web\UI\App_Plugins\Meganav\Js\meganav.resource.js" />
     <Content Include="Web\UI\App_Plugins\Meganav\Js\meganav.controller.js" />
+    <Content Include="Web\UI\App_Plugins\Meganav\lang\en-GB.xml" />
+    <Content Include="Web\UI\App_Plugins\Meganav\lang\en-US.xml" />
+    <Content Include="Web\UI\App_Plugins\Meganav\Views\configdialog.html" />
+    <Content Include="Web\UI\App_Plugins\Meganav\Views\prevalue-editor.html" />
     <Content Include="Web\UI\App_Plugins\Meganav\Views\editor.html" />
     <Content Include="Web\UI\Views\Partials\ExampleNavigation.cshtml" />
     <None Include="Web\UI\App_Plugins\Meganav\package.manifest" />
@@ -191,6 +196,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.5.0\lib\System.Data.SqlServerCe.dll</HintPath>
       <Private>True</Private>

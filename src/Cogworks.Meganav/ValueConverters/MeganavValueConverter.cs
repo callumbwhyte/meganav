@@ -42,13 +42,46 @@ namespace Cogworks.Meganav.ValueConverters
 
             foreach (var item in items)
             {
-                item.Level = level;
+                if (item.Config == null)
+                {
+                    item.Config = new Dictionary<string, object>();
+                }
+                // if name is set, use name, otherwise use title
+                item.Name = !string.IsNullOrEmpty(item.Name) ? item.Name : item.Title;
 
+                item.Level = level;
                 // it's likely a content item
                 if (item.Id > 0)
                 {
-                    item.ItemType = ItemType.Content;
-                    item.Content = UmbracoContext.Current.ContentCache.GetById(item.Id);
+                    var umbracoContent = UmbracoContext.Current.ContentCache.GetById(item.Id);
+
+                    if (umbracoContent != null)
+                    {
+                        // test if umbracoNaviHide is available
+                        var umbracoNaviHide = false;
+                        if (umbracoContent.HasProperty("umbracoNaviHide"))
+                        {
+                            umbracoNaviHide = umbracoContent.GetPropertyValue<bool>("umbracoNaviHide");
+                        }
+
+                        if (!umbracoNaviHide)
+                        {
+                            item.ItemType = ItemType.Content;
+                            item.Content = umbracoContent;
+                        }
+                        else
+                        {
+                            // umbraconavihide, remove item from nav
+                            items = items.Where(x => x.Id != item.Id);
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        // item is not in umbraco cache, so probably  not published, remove item from nav
+                        items = items.Where(x => x.Id != item.Id);
+                        continue;
+                    }
                 }
 
                 // process child items
@@ -59,9 +92,6 @@ namespace Cogworks.Meganav.ValueConverters
                     BuildMenu(item.Children, childLevel);
                 }
             }
-
-            // remove unpublished content items
-            items = items.Where(x => x.Content != null || x.ItemType == ItemType.Link);
 
             return items;
         }

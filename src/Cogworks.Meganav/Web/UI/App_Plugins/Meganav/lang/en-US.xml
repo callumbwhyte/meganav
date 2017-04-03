@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="en_us" intName="English (US)" localName="English (US)" lcid="" culture="en-US">
+    <creator>
+        <name>The Umbraco community</name>
+        <link>http://our.umbraco.org</link>
+    </creator>
+    <area alias="general">
+        <key alias="config">Config</key>
+    </area>
+</language>
