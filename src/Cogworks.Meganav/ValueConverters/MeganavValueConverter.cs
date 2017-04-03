@@ -46,9 +46,7 @@ namespace Cogworks.Meganav.ValueConverters
                 {
                     item.Config = new Dictionary<string, object>();
                 }
-                // if name is set, use name, otherwise use title
-                item.Name = !string.IsNullOrEmpty(item.Name) ? item.Name : item.Title;
-
+               
                 item.Level = level;
                 // it's likely a content item
                 if (item.Id > 0)
