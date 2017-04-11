@@ -63,21 +63,13 @@ namespace Cogworks.Meganav.ValueConverters
                             umbracoNaviHide = umbracoContent.GetPropertyValue<bool>("umbracoNaviHide");
                         }
 
-                        if (!umbracoNaviHide)
-                        {
-                            item.ItemType = ItemType.Content;
-                            item.Content = umbracoContent;
-                        }
-                        else
-                        {
-                            // umbraconavihide, remove item from nav
-                            items = items.Where(x => x.Id != item.Id);
-                            continue;
-                        }
+                        item.ItemType = ItemType.Content;
+                        item.Content = umbracoContent;
+                        item.NaviHide = umbracoNaviHide;
                     }
                     else
                     {
-                        // item is not in umbraco cache, so probably  not published, remove item from nav
+                        // item is not in umbraco cache, so not published, remove item from nav
                         items = items.Where(x => x.Id != item.Id);
                         continue;
                     }

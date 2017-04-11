@@ -19,6 +19,8 @@ namespace Cogworks.Meganav.Models
         [JsonConverter(typeof(DictionaryConverter))]
         public IDictionary<string, object> Config { get; set; }
 
+        public bool NaviHide { get; set; }
+
         [JsonIgnore]
         public IPublishedContent Content { get; set; }
 
