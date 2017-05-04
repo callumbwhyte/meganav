@@ -7,7 +7,6 @@
         // retreive the saved items
         $scope.items = $scope.model.value;
 
-        console.log($scope.items);
         // get updated entities for content
         getItemEntities($scope.items);
     }
@@ -24,8 +23,6 @@
 
         $scope.meganavSettingsOverlay.settings = config;
 
-        console.log(menuItem);
-
         if (angular.isObject(menuItem.config)) {
             _.each(config, function (cfg) {
                 var val = menuItem.config[cfg.key];
@@ -37,7 +34,6 @@
 
         $scope.meganavSettingsOverlay.submit = function (model) {
 
-            console.log(model);
             var configObject = {};
 
             _.each(model.settings,
