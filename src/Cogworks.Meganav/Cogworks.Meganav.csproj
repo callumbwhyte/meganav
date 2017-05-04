@@ -61,7 +61,6 @@
     <Content Include="Web\UI\App_Plugins\Meganav\lang\en-GB.xml" />
     <Content Include="Web\UI\App_Plugins\Meganav\lang\en-US.xml" />
     <Content Include="Web\UI\App_Plugins\Meganav\Views\configdialog.html" />
-    <Content Include="Web\UI\App_Plugins\Meganav\Views\prevalue-editor.html" />
     <Content Include="Web\UI\App_Plugins\Meganav\Views\editor.html" />
     <Content Include="Web\UI\Views\Partials\ExampleNavigation.cshtml" />
     <None Include="Web\UI\App_Plugins\Meganav\package.manifest" />
