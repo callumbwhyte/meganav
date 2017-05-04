@@ -56,7 +56,7 @@
       <DependentUpon>umb-node-preview.less</DependentUpon>
     </Content>
     <Content Include="Web\UI\App_Plugins\Meganav\Js\angular-ui-tree.js" />
-    <Content Include="Web\UI\App_Plugins\Meganav\Js\meganav.prevaule.controller.js" />
+    <Content Include="Web\UI\App_Plugins\Meganav\Js\meganav.prevalue.controller.js" />
     <Content Include="Web\UI\App_Plugins\Meganav\Js\meganav.resource.js" />
     <Content Include="Web\UI\App_Plugins\Meganav\Js\meganav.controller.js" />
     <Content Include="Web\UI\App_Plugins\Meganav\lang\en-GB.xml" />
