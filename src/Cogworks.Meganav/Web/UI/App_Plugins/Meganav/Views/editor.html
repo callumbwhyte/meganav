@@ -23,14 +23,14 @@
     <!-- repeatable nav item template -->
     <script type="text/ng-template" id="nav_item_template.html">
 
-        <div ui-tree-handle class="umb-node-preview umb-node-preview--sortable" ng-class="{'umb-node-preview--unpublished': item.published === false}">
+        <div ui-tree-handle class="umb-node-preview umb-node-preview--sortable" ng-class="{'umb-node-preview--unpublished': item.published === false, 'umb-node-preview--navihide': item.navihide === true}">
 
             <i ng-if="item.icon" class="umb-node-preview__icon {{item.icon}}"></i>
 
             <div class="umb-node-preview__content">
 
                 <div class="umb-node-preview__name">
-                    {{item.title}}
+                    {{item.name || item.title}}
                 </div>
 
                 <div class="umb-node-preview__description">
@@ -42,6 +42,10 @@
             </div>
 
             <div class="umb-node-preview__actions">
+
+                <a href="" class="umb-node-preview__action" ng-click="config(item)" data-nodrag>
+                    <i class="icon-settings"></i>
+                </a>
 
                 <a href="" class="umb-node-preview__action" ng-click="edit(item)" data-nodrag>
                     <localize key="general_edit">Edit</localize>
@@ -67,6 +71,12 @@
     <umb-overlay ng-if="contentPickerOverlay.show"
                  model="contentPickerOverlay"
                  view="contentPickerOverlay.view"
+                 position="right">
+    </umb-overlay>
+
+    <umb-overlay ng-if="meganavSettingsOverlay.show"
+                 model="meganavSettingsOverlay"
+                 view="meganavSettingsOverlay.view"
                  position="right">
     </umb-overlay>
 

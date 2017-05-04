@@ -7,7 +7,6 @@
         // retreive the saved items
         $scope.items = $scope.model.value;
 
-        console.log($scope.items);
         // get updated entities for content
         getItemEntities($scope.items);
     }
@@ -24,8 +23,6 @@
 
         $scope.meganavSettingsOverlay.settings = config;
 
-        console.log(menuItem);
-
         if (angular.isObject(menuItem.config)) {
             _.each(config, function (cfg) {
                 var val = menuItem.config[cfg.key];
@@ -36,8 +33,6 @@
         }
 
         $scope.meganavSettingsOverlay.submit = function (model) {
-
-            console.log(model);
             var configObject = {};
 
             _.each(model.settings,
@@ -49,7 +44,6 @@
 
             menuItem.config = configObject;
 
-            console.log(menuItem);
             currentForm.$setDirty();
 
             $scope.meganavSettingsOverlay.show = false;
@@ -81,7 +75,6 @@
     };
 
     $scope.$on("formSubmitting", function (ev, args) {
-        console.log($scope.items);
         $scope.model.value = $scope.items;
     });
 
@@ -114,9 +107,10 @@
     }
 
     function buildNavItem(data) {
+
         return {
             id: data.id,
-            title: data.name || data.title,
+            title: data.name,
             target: data.target,
             url: data.url || "#",
             children: [],
