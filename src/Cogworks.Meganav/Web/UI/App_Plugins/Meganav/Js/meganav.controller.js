@@ -70,7 +70,8 @@
     function buildNavItem(data) {
         return {
             id: data.id,
-            title: data.name || data.title,
+            name: data.name,
+            title: data.title,
             target: data.target,
             url: data.url || "#",
             children: [],
