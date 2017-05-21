@@ -16,7 +16,7 @@
             $scope.items.push(buildNavItem(model.value));
 
             // close settings
-            hideSettings();
+            closeSettings();
         });
     };
 
@@ -26,7 +26,7 @@
             item = buildNavItem(model.value);
 
             // close settings
-            hideSettings();
+            closeSettings();
         });
     };
 
@@ -52,7 +52,7 @@
         });
     }
 
-    function openSettings(item, callback) {
+    function openSettings (item, callback) {
         $scope.settingsOverlay = {
             title: "Settings",
             view: "/App_Plugins/Meganav/Views/settings.html",
@@ -62,12 +62,12 @@
         }
     }
 
-    function hideSettings() {
+    function closeSettings () {
         $scope.settingsOverlay.show = false;
         $scope.settingsOverlay = null;
     }
 
-    function buildNavItem(data) {
+    function buildNavItem (data) {
         return {
             id: data.id,
             name: data.name,
