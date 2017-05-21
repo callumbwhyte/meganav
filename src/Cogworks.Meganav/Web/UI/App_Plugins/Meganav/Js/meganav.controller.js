@@ -10,12 +10,23 @@
         getItemEntities($scope.items);
     }
 
+    $scope.add = function () {
+        openSettings(null, function (model) {
+            // add item to scope
+            $scope.items.push(buildNavItem(model.value));
+
+            // close settings
+            hideSettings();
+        });
+    };
+
     $scope.edit = function (item) {
-        dialogService.linkPicker({
-            currentTarget: item,
-            callback: function (item) {
-                item = buildNavItem(item);
-            }
+        openSettings(item, function (model) {
+            // update item in scope
+            item = buildNavItem(model.value);
+
+            // close settings
+            hideSettings();
         });
     };
 
@@ -26,18 +37,6 @@
     $scope.$on("formSubmitting", function (ev, args) {
         $scope.model.value = $scope.items;
     });
-
-    $scope.add = function (item) {
-        $scope.items.push(buildNavItem(item));
-    };
-
-    $scope.openLinkPicker = function () {
-        dialogService.linkPicker({
-            callback: function (data) {
-                $scope.add(data);
-            }
-        });
-    };
 
     function getItemEntities (items) {
         _.each(items, function (item) {
@@ -51,6 +50,21 @@
                 }
             }
         });
+    }
+
+    function openSettings(item, callback) {
+        $scope.settingsOverlay = {
+            title: "Settings",
+            view: "/App_Plugins/Meganav/Views/settings.html",
+            show: true,
+            value: item,
+            submit: callback
+        }
+    }
+
+    function hideSettings() {
+        $scope.settingsOverlay.show = false;
+        $scope.settingsOverlay = null;
     }
 
     function buildNavItem(data) {
