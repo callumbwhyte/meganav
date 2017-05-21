@@ -16,6 +16,7 @@ namespace Cogworks.Meganav.Web.Controllers.API
             {
                 return Request.CreateResponse(HttpStatusCode.OK, new
                 {
+                    id = entity.Id,
                     name = entity.Name,
                     icon = entity.ContentType.Icon,
                     url = Umbraco.Url(entity.Id),
