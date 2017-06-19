@@ -14,7 +14,7 @@
         dialogService.linkPicker({
             currentTarget: item,
             callback: function (item) {
-                item = buildNavItem(item);
+                angular.extend(item, buildNavItem(data));
             }
         });
     };
