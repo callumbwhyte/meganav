@@ -12,8 +12,11 @@
 
     $scope.edit = function (item) {
         dialogService.linkPicker({
-            currentTarget: item,
-            callback: function (item) {
+            // Assign value to new empty object to break refs
+            // Prevent accidentally auto changing old values
+            currentTarget: angular.extend({}, item),
+            callback: function (data) {
+                // Assign new values via extend to maintain refs
                 angular.extend(item, buildNavItem(data));
             }
         });
