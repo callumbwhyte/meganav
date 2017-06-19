@@ -277,6 +277,15 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Web\UI\App_Plugins\Meganav\Views\settings.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web\UI\App_Plugins\Meganav\Js\meganavSettings.controller.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Web\UI\Views\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <PropertyGroup>

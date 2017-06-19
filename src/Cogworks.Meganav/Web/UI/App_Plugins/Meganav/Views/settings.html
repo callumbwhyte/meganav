@@ -1,0 +1,69 @@
+﻿<div ng-controller="Cogworks.Meganav.MeganavSettingsController" class="umb-overlay-body">
+
+    <umb-control-group label="@content_urls">
+
+        <input type="text"
+               name="linkUrl"
+               localize="placeholder"
+               placeholder="@general_url"
+               class="umb-editor umb-textstring"
+               ng-model="target.url"
+               ng-disabled="target.id"
+               ng-required="!target.url" />
+
+    </umb-control-group>
+
+    <umb-control-group label="@content_nodeName">
+
+        <p ng-if="target.name">
+            <strong>Node name:</strong> {{target.name}}
+        </p>
+
+        <input type="text"
+               localize="placeholder"
+               placeholder="@placeholders_entername"
+               class="umb-editor umb-textstring"
+               ng-model="target.title"
+               ng-required="!target.name" />
+
+    </umb-control-group>
+
+    <umb-control-group label="@content_target">
+
+        <select class="umb-editor umb-dropdown" ng-model="target.target">
+            <option value=""></option>
+            <option value="_blank">Opens the linked document in a new window or tab</option>
+            <option value="_top">Opens the linked document in the full body of the window</option>
+            <option value="_parent">Opens the linked document in the parent frame</option>
+        </select>
+
+    </umb-control-group>
+
+    <umb-tree-search-box hide-search-callback="hideSearch"
+                         search-callback="onSearchResults"
+                         search-from-id="{{searchInfo.searchFromId}}"
+                         search-from-name="{{searchInfo.searchFromName}}"
+                         show-search="{{searchInfo.showSearch}}"
+                         section="{{section}}">
+    </umb-tree-search-box>
+
+    <br />
+
+    <umb-tree-search-results ng-if="searchInfo.showSearch"
+                             results="searchInfo.results"
+                             select-result-callback="selectResult">
+    </umb-tree-search-results>
+
+    <div ng-hide="searchInfo.showSearch">
+
+        <umb-tree section="content"
+                  hideheader="true"
+                  hideoptions="true"
+                  eventhandler="dialogTreeEventHandler"
+                  isdialog="true"
+                  enablecheckboxes="true">
+        </umb-tree>
+
+    </div>
+
+</div>
