@@ -1,4 +1,4 @@
-﻿function Meganav($scope, dialogService, meganavResource) {
+﻿function Meganav($scope, meganavResource) {
 
     $scope.items = [];
 
@@ -21,8 +21,7 @@
         openSettings(item, function (model) {
             // update item in scope
             // Assign new values via extend to maintain refs
-            console.log(model);
-            angular.extend(item, buildNavItem(model));
+            angular.extend(item, buildNavItem(model.value));
         });
     };
 
@@ -48,7 +47,7 @@
         });
     }
 
-    function openSettings(item, callback) {
+    function openSettings (item, callback) {
         // Assign value to new empty object to break refs
         // Prevent accidentally auto changing old values
         $scope.settingsOverlay = {
@@ -57,9 +56,9 @@
             show: true,
             value: angular.extend({}, item),
             submit: function (model) {
-              !callback || callback(model);
-              // close settings
-              closeSettings();
+                !callback || callback(model);
+                // close settings
+                closeSettings();
             }
         }
     }
