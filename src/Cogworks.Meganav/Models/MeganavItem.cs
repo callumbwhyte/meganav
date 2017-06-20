@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cogworks.Meganav.Converters;
 using Cogworks.Meganav.Enums;
 using Newtonsoft.Json;
 using Umbraco.Core.Models;
@@ -17,6 +18,9 @@ namespace Cogworks.Meganav.Models
 
         [JsonIgnore]
         public IPublishedContent Content { get; set; }
+
+        [JsonConverter( typeof( DictionaryConverter ) )]
+        public IDictionary<string, object> Properties { get; set; }
 
         #region Internal
 

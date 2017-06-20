@@ -1,85 +1,160 @@
 ﻿function Meganav($scope, meganavResource) {
 
-    $scope.items = [];
+  $scope.items = [];
 
-    if ($scope.model.value) {
-        // retreive the saved items
-        $scope.items = $scope.model.value;
-
-        // get updated entities for content
-        getItemEntities($scope.items);
+  // Configure UI Tree Options
+  $scope.treeOptions = {
+    dropped: function (e) {
+      setLevel(e.dest.nodesScope.depth(), e.source.nodeScope);
     }
+  }
 
-    $scope.add = function () {
-        openSettings(null, function (model) {
-            // add item to scope
-            $scope.items.push(buildNavItem(model.value));
-        });
-    };
+  function setLevel(depth, node) {
+    if (node) {
+      if (angular.isObject(node.$modelValue)) {
+        node.$modelValue.level = depth;
+      }
+      if (node.hasChild()) {
+        _.each(node.childNodes(), setLevel.bind(this, depth + 1));
+      }
+    }
+  }
 
-    $scope.edit = function (item) {
-        openSettings(item, function (model) {
-            // update item in scope
-            // Assign new values via extend to maintain refs
-            angular.extend(item, buildNavItem(model.value));
-        });
-    };
+  // Store properties config
+  var propertyFields = $scope.model.config.properties || [];
 
-    $scope.remove = function (item) {
-        item.remove();
-    };
+  // Initial Setup
+  if ($scope.model.value) {
+    // retreive the saved items
+    $scope.items = $scope.model.value;
 
-    $scope.$on("formSubmitting", function (ev, args) {
-        $scope.model.value = $scope.items;
+    // get updated entities for content
+    getItemEntities($scope.items);
+  }
+
+  // Add new item
+  $scope.add = function () {
+    openSettings({}, function (model) {
+      // add item to scope
+      $scope.items.push(buildNavItem(model.value));
     });
+  };
 
-    function getItemEntities (items) {
-        _.each(items, function (item) {
-            if (item.id) {
-                meganavResource.getById(item.id).then(function (response) {
-                    angular.extend(item, response.data);
-                });
+  // Edit item
+  $scope.edit = function (item) {
+    openSettings(item, function (model) {
+      // update item in scope
+      // Assign new values via extend to maintain refs
+      buildNavItem(model.value, item);
+    });
+  };
 
-                if (item.children.length > 0) {
-                    getItemEntities(item.children);
-                }
-            }
+  // Remove item
+  $scope.remove = function (item) {
+    item.remove();
+  };
+
+  // Apply value
+  $scope.$on("formSubmitting", function (ev, args) {
+    $scope.model.value = $scope.items;
+  });
+
+  // Find entities
+  function getItemEntities(items) {
+    _.each(items, function (item) {
+      if (item.id) {
+        meganavResource.getById(item.id).then(function (response) {
+          angular.extend(item, response.data);
         });
-    }
 
-    function openSettings (item, callback) {
-        // Assign value to new empty object to break refs
-        // Prevent accidentally auto changing old values
-        $scope.settingsOverlay = {
-            title: "Settings",
-            view: "/App_Plugins/Meganav/Views/settings.html",
-            show: true,
-            value: angular.extend({}, item),
-            submit: function (model) {
-                !callback || callback(model);
-                // close settings
-                closeSettings();
-            }
+        if (item.children.length > 0) {
+          getItemEntities(item.children);
         }
+      }
+    });
+  }
+
+  // Open settings overlay
+  function openSettings(item, callback) {
+    // Update Properties appropriately
+    if (!angular.isObject(item.properties)) {
+      item.properties = {};
     }
 
-    function closeSettings () {
-        $scope.settingsOverlay.show = false;
-        $scope.settingsOverlay = null;
-    }
+    // Get available property fields
+    var props = angular.copy(propertyFields).filter(isPropertyFieldEnabled, item).map(setPropertyFieldValue, item);
 
-    function buildNavItem (data) {
-        return {
-            id: data.id,
-            name: data.name,
-            title: data.title,
-            target: data.target,
-            url: data.url || "#",
-            children: [],
-            icon: data.icon || "icon-link",
-            published: true
-        }
+    // Clone original item so our changes aren't live
+    clonedItem = angular.copy(item);
+
+    // Assign value to new empty object to break refs
+    // Prevent accidentally auto changing old values
+    $scope.settingsOverlay = {
+      title: "Settings",
+      view: "/App_Plugins/Meganav/Views/settings.html",
+      show: true,
+      value: clonedItem,
+      properties: props,
+      submit: function (model) {
+        // Update Properties
+        model.value.properties = getItemProperties(model.value, model.properties);
+        !callback || callback(model);
+
+        // close settings
+        closeSettings();
+      }
     }
+  }
+
+  // Close settings overlay
+  function closeSettings() {
+    $scope.settingsOverlay.show = false;
+    $scope.settingsOverlay = null;
+  }
+
+  // Create/Update Nav Item
+  function buildNavItem(data, old) {
+    var defaults = {
+      id: "",
+      name: "",
+      title: "",
+      target: "",
+      url: "#",
+      level: 0,
+      children: [],
+      icon: "icon-link",
+      published: true,
+      properties: {},
+    };
+    return angular.extend(old || defaults, data);
+  }
+
+  // Check if property field should be enabled for current item
+  function isPropertyFieldEnabled(prop) {
+    return (
+      angular.isUndefined(prop.applyTo) ||
+      !angular.isArray(prop.applyTo) ||
+      !prop.applyTo.length ||
+      prop.applyTo.indexOf(this.level || 0) >= 0
+    );
+  }
+
+  // Set the items values on the property field
+  function setPropertyFieldValue(prop) {
+    var val = this.properties[prop.key];
+    prop.value = val;
+    return prop;
+  }
+
+  // Get the properties for an item from an array of property fields
+  function getItemProperties(item, props) {
+    props = _.isEmpty(props) ? propertyFields : props;
+    return angular.extend({},
+      ...props
+        .filter(isPropertyFieldEnabled, item)
+        .map(x => ({[x.key]: x.value }))
+    );
+  }
 }
 
 angular.module("umbraco").controller("Cogworks.Meganav.MeganavController", Meganav);
