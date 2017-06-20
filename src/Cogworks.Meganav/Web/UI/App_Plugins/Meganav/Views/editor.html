@@ -3,7 +3,7 @@
     <ng-form name="meganavEditorForm">
 
         <!-- meganav sortable tree -->
-        <div ui-tree data-max-depth="{{model.config.maxDepth}}">
+        <div ui-tree="treeOptions" data-max-depth="{{model.config.maxDepth}}">
 
             <ol ui-tree-nodes ng-model="items">
 

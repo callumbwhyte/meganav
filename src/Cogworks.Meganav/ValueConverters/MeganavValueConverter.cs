@@ -51,6 +51,12 @@ namespace Cogworks.Meganav.ValueConverters
                     item.Content = UmbracoContext.Current.ContentCache.GetById(item.Id);
                 }
 
+                // Extra properties default value
+                if ( item.Properties == null )
+                {
+                    item.Properties = new Dictionary<string, object>();
+                }
+
                 // process child items
                 if (item.Children.Any())
                 {
