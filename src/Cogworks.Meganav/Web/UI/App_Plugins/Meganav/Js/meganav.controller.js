@@ -1,4 +1,4 @@
-﻿function Meganav($scope, dialogService, meganavResource) {
+﻿function Meganav($scope, meganavResource) {
 
     $scope.items = [];
 
@@ -14,19 +14,14 @@
         openSettings(null, function (model) {
             // add item to scope
             $scope.items.push(buildNavItem(model.value));
-
-            // close settings
-            closeSettings();
         });
     };
 
     $scope.edit = function (item) {
         openSettings(item, function (model) {
             // update item in scope
-            item = buildNavItem(model.value);
-
-            // close settings
-            closeSettings();
+            // Assign new values via extend to maintain refs
+            angular.extend(item, buildNavItem(model.value));
         });
     };
 
@@ -53,12 +48,18 @@
     }
 
     function openSettings (item, callback) {
+        // Assign value to new empty object to break refs
+        // Prevent accidentally auto changing old values
         $scope.settingsOverlay = {
             title: "Settings",
             view: "/App_Plugins/Meganav/Views/settings.html",
             show: true,
-            value: item,
-            submit: callback
+            value: angular.extend({}, item),
+            submit: function (model) {
+                !callback || callback(model);
+                // close settings
+                closeSettings();
+            }
         }
     }
 
