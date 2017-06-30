@@ -8,7 +8,7 @@ A flexible, draggable link picker for constructing site navigation menus, big or
 
 ## Getting started
 
-This package is supported on Umbraco 7.5+.
+This package is supported on Umbraco 7.4+.
 
 ### Installation
 
