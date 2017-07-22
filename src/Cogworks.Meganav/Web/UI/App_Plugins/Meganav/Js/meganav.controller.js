@@ -1,7 +1,7 @@
 ﻿function Meganav($scope, meganavResource) {
 
     $scope.items = [];
-
+    
     if ($scope.model.value) {
         // retreive the saved items
         $scope.items = $scope.model.value;
@@ -20,13 +20,17 @@
     $scope.edit = function (item) {
         openSettings(item, function (model) {
             // update item in scope
-            // Assign new values via extend to maintain refs
+            // assign new values via extend to maintain refs
             angular.extend(item, buildNavItem(model.value));
         });
     };
 
     $scope.remove = function (item) {
         item.remove();
+    };
+
+    $scope.isVisible = function (item) {
+        return $scope.model.config.removeNaviHideItems == true ? item.naviHide !== true : true;
     };
 
     $scope.$on("formSubmitting", function (ev, args) {
@@ -48,8 +52,8 @@
     }
 
     function openSettings (item, callback) {
-        // Assign value to new empty object to break refs
-        // Prevent accidentally auto changing old values
+        // assign value to new empty object to break refs
+        // prevent accidentally changing old values
         $scope.settingsOverlay = {
             title: "Settings",
             view: "/App_Plugins/Meganav/Views/settings.html",
@@ -77,7 +81,8 @@
             url: data.url || "#",
             children: [],
             icon: data.icon || "icon-link",
-            published: true
+            published: true,
+            naviHide: data.naviHide
         }
     }
 }
