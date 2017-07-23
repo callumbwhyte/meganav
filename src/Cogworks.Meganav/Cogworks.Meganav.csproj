@@ -58,7 +58,9 @@
     <None Include="Web\UI\App_Plugins\Meganav\Js\angular-ui-tree.js" />
     <None Include="Web\UI\App_Plugins\Meganav\Js\meganav.resource.js" />
     <None Include="Web\UI\App_Plugins\Meganav\Js\meganav.controller.js" />
+    <None Include="Web\UI\App_Plugins\Meganav\Js\meganavSettings.controller.js" />
     <None Include="Web\UI\App_Plugins\Meganav\Views\editor.html" />
+    <None Include="Web\UI\App_Plugins\Meganav\Views\settings.html" />
     <None Include="Web\UI\Views\Partials\ExampleNavigation.cshtml" />
     <None Include="Web\UI\App_Plugins\Meganav\package.manifest" />
   </ItemGroup>
@@ -277,12 +279,6 @@
       <HintPath>..\packages\UrlRewritingNet.2.0.7\lib\UrlRewritingNet.UrlRewriter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web\UI\App_Plugins\Meganav\Views\settings.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web\UI\App_Plugins\Meganav\Js\meganavSettings.controller.js" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
