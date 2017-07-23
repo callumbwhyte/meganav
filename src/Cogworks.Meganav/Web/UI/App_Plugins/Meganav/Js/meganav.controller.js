@@ -1,7 +1,7 @@
 ﻿function Meganav($scope, meganavResource) {
 
   $scope.items = [];
-
+    
   // Configure UI Tree Options
   $scope.treeOptions = {
     dropped: function (e) {
@@ -44,7 +44,7 @@
   $scope.edit = function (item) {
     openSettings(item, function (model) {
       // update item in scope
-      // Assign new values via extend to maintain refs
+      // assign new values via extend to maintain refs
       buildNavItem(model.value, item);
     });
   };
@@ -54,7 +54,10 @@
     item.remove();
   };
 
-  // Apply value
+    $scope.isVisible = function (item) {
+        return $scope.model.config.removeNaviHideItems == true ? item.naviHide !== true : true;
+    };
+
   $scope.$on("formSubmitting", function (ev, args) {
     $scope.model.value = $scope.items;
   });
@@ -121,10 +124,10 @@
       target: "",
       url: "#",
       level: 0,
-      children: [],
+      children: data.children || [],
       icon: "icon-link",
       published: true,
-      properties: {},
+      naviHide: data.naviHide
     };
     return angular.extend(old || defaults, data);
   }

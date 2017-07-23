@@ -23,7 +23,8 @@
     <!-- repeatable nav item template -->
     <script type="text/ng-template" id="nav_item_template.html">
 
-        <div ui-tree-handle class="umb-node-preview umb-node-preview--sortable" ng-class="{'umb-node-preview--unpublished': item.published === false}">
+        <div ui-tree-handle class="umb-node-preview umb-node-preview--sortable"
+             ng-class="{'umb-node-preview--unpublished': item.published === false, 'umb-node-preview--navihide': isVisible(item) === false}">
 
             <i ng-if="item.icon" class="umb-node-preview__icon {{item.icon}}"></i>
 
