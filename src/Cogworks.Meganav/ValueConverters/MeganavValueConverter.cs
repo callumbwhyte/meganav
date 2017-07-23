@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cogworks.Meganav.Enums;
+using Cogworks.Meganav.Helpers;
 using Cogworks.Meganav.Models;
 using Newtonsoft.Json;
 using Umbraco.Core.Logging;
@@ -15,6 +16,8 @@ namespace Cogworks.Meganav.ValueConverters
     [PropertyValueType(typeof(IEnumerable<MeganavItem>))]
     public class MeganavValueConverter : PropertyValueConverterBase
     {
+        private bool RemoveNaviHideItems;
+
         public override bool IsConverter(PublishedPropertyType propertyType)
         {
             return propertyType.PropertyEditorAlias.Equals(Constants.PropertyEditorAlias);
@@ -22,6 +25,13 @@ namespace Cogworks.Meganav.ValueConverters
 
         public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
         {
+            var preValues = PreValueHelper.GetPreValues(propertyType.DataTypeId);
+
+            if (preValues.ContainsKey("removeNaviHideItems"))
+            {
+                RemoveNaviHideItems = preValues["removeNaviHideItems"] == "1";
+            }
+
             try
             {
                 var items = JsonConvert.DeserializeObject<IEnumerable<MeganavItem>>(source.ToString());
@@ -47,8 +57,28 @@ namespace Cogworks.Meganav.ValueConverters
                 // it's likely a content item
                 if (item.Id > 0)
                 {
-                    item.ItemType = ItemType.Content;
-                    item.Content = UmbracoContext.Current.ContentCache.GetById(item.Id);
+                    var umbracoContent = UmbracoContext.Current.ContentCache.GetById(item.Id);
+
+                    if (umbracoContent != null)
+                    {
+                        // set item type
+                        item.ItemType = ItemType.Content;
+
+                        // skip item if umbracoNaviHide enabled
+                        if (RemoveNaviHideItems && !umbracoContent.IsVisible())
+                        {
+                            continue;
+                        }
+
+                        // set content to node
+                        item.Content = umbracoContent;
+
+                        // set title to node name if no override is set
+                        if (string.IsNullOrWhiteSpace(item.Title))
+                        {
+                            item.Title = umbracoContent.Name;
+                        }
+                    } 
                 }
 
                 // process child items
