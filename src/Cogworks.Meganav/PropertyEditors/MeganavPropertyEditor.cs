@@ -15,7 +15,7 @@ namespace Cogworks.Meganav.PropertyEditors
             [PreValueField("maxDepth", "Max Depth", "number", Description = "The maximum number of levels in the navigation")]
             public string MaxDepth { get; set; }
             
-            [PreValueField("removeNaviHideItems", "Remove NaviHide Items", "boolean", Description = "Removes items where umbracoNaviHide is true")]
+            [PreValueField("removeNaviHideItems", "Remove NaviHide Items", "boolean", Description = "Remove items where umbracoNaviHide is true")]
             public bool RemoveNaviHideItems { get; set; }
         }
     }

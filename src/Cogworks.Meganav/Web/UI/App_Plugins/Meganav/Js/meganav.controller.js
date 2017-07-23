@@ -79,7 +79,7 @@
             title: data.title,
             target: data.target,
             url: data.url || "#",
-            children: [],
+            children: data.children || [],
             icon: data.icon || "icon-link",
             published: true,
             naviHide: data.naviHide
