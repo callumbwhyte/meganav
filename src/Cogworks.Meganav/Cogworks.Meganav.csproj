@@ -59,8 +59,10 @@
     <None Include="Web\UI\App_Plugins\Meganav\Js\angular-ui-tree.js" />
     <None Include="Web\UI\App_Plugins\Meganav\Js\meganav.resource.js" />
     <None Include="Web\UI\App_Plugins\Meganav\Js\meganav.controller.js" />
+    <None Include="Web\UI\App_Plugins\Meganav\Js\meganavPrevalue.controller.js" />
     <None Include="Web\UI\App_Plugins\Meganav\Js\meganavSettings.controller.js" />
     <None Include="Web\UI\App_Plugins\Meganav\Views\editor.html" />
+    <None Include="Web\UI\App_Plugins\Meganav\Views\prevalues.html" />
     <None Include="Web\UI\App_Plugins\Meganav\Views\settings.html" />
     <None Include="Web\UI\Views\Partials\ExampleNavigation.cshtml" />
     <None Include="Web\UI\App_Plugins\Meganav\package.manifest" />
