@@ -54,6 +54,10 @@
     item.remove();
   };
 
+  $scope.isVisible = function (item) {
+    return $scope.model.config.removeNaviHideItems == true ? item.naviHide !== true : true;
+  };
+
   // Apply value
   $scope.$on("formSubmitting", function (ev, args) {
     $scope.model.value = $scope.items;
