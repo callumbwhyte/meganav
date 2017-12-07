@@ -34,6 +34,7 @@
     <Compile Include="Converters\DictionaryConverter.cs" />
     <Compile Include="Enums\MeganavItem.cs" />
     <Compile Include="Helpers\PreValueHelper.cs" />
+    <Compile Include="Models\IMeganavItem.cs" />
     <Compile Include="Models\MeganavItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyEditors\MeganavPropertyEditor.cs" />

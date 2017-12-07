@@ -78,7 +78,8 @@ module.exports = function(grunt) {
                 src: projectDir + pkg.name + '.csproj',
                 dest: releaseDir + 'nuget/',
                 options: {
-                    properties: 'Platform=AnyCPU;Configuration=Release'
+                    properties: 'Platform=AnyCPU;Configuration=Release',
+                    version: version
                 }
             }
         }

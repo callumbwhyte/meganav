@@ -13,7 +13,7 @@ using Umbraco.Web;
 namespace Cogworks.Meganav.ValueConverters
 {
     [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Content)]
-    [PropertyValueType(typeof(IEnumerable<MeganavItem>))]
+    [PropertyValueType(typeof(IEnumerable<IMeganavItem>))]
     public class MeganavValueConverter : PropertyValueConverterBase
     {
         private bool RemoveNaviHideItems;
@@ -46,7 +46,7 @@ namespace Cogworks.Meganav.ValueConverters
             return null;
         }
 
-        internal IEnumerable<MeganavItem> BuildMenu(IEnumerable<MeganavItem> items, int level = 0)
+        internal IEnumerable<IMeganavItem> BuildMenu(IEnumerable<IMeganavItem> items, int level = 0)
         {
             items = items.ToList();
 

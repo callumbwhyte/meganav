@@ -6,7 +6,7 @@ using Umbraco.Core.Models;
 
 namespace Cogworks.Meganav.Models
 {
-    public class MeganavItem
+    public class MeganavItem : IMeganavItem
     {
         public int Id { get; set; }
         
@@ -24,7 +24,7 @@ namespace Cogworks.Meganav.Models
 
         #region Internal
 
-        public IEnumerable<MeganavItem> Children { get; set; }
+        public IEnumerable<IMeganavItem> Children { get; set; }
 
         [JsonIgnore]
         public ItemType ItemType { get; set; }
