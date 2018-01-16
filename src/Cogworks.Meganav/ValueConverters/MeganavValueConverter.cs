@@ -25,6 +25,10 @@ namespace Cogworks.Meganav.ValueConverters
 
         public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
         {
+            var sourceString = source?.ToString();
+            if (string.IsNullOrWhiteSpace(sourceString))
+                return null;
+
             var preValues = PreValueHelper.GetPreValues(propertyType.DataTypeId);
 
             if (preValues.ContainsKey("removeNaviHideItems"))
@@ -34,7 +38,7 @@ namespace Cogworks.Meganav.ValueConverters
 
             try
             {
-                var items = JsonConvert.DeserializeObject<IEnumerable<MeganavItem>>(source.ToString());
+                var items = JsonConvert.DeserializeObject<IEnumerable<MeganavItem>>(sourceString);
 
                 return BuildMenu(items);
             }
