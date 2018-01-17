@@ -75,6 +75,7 @@ Meganav uses a _slightly_ modified version of [Angular UI Tree](https://github.c
 * [Marcin Zajkowski](https://twitter.com/zajkowskimarcin)
 * [Arnold Visser](https://twitter.com/aim24)
 * [Robin Neal](https://twitter.com/SudoCat429)
+* [Lee Kelleher](https://twitter.com/leekelleher)
 
 ## License
 

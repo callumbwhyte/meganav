@@ -26,8 +26,11 @@ namespace Cogworks.Meganav.ValueConverters
         public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
         {
             var sourceString = source?.ToString();
+
             if (string.IsNullOrWhiteSpace(sourceString))
+            {
                 return null;
+            }
 
             var preValues = PreValueHelper.GetPreValues(propertyType.DataTypeId);
 
