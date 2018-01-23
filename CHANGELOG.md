@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.1] - 2018-17-01
+### Fixed
+* Exception thrown when trying to render an empty Meganav
+
 ## [1.1.0] - 2017-23-07
 ### Added
 * Support for UmbracoNaviHide on content items
@@ -38,6 +42,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * README file with information about the project and screenshots
 * MIT license in the form of a LICENSE.md file
 
-[Unreleased]: https://github.com/thecogworks/meganav/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/thecogworks/meganav/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/thecogworks/meganav/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/thecogworks/meganav/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/thecogworks/meganav/compare/v1.0.0...v1.0.1
