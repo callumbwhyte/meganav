@@ -24,6 +24,7 @@ namespace Cogworks.Meganav.Models
 
         #region Internal
 
+        [JsonConverter(typeof(ChildConverter<MeganavItem>))]
         public IEnumerable<IMeganavItem> Children { get; set; }
 
         [JsonIgnore]
