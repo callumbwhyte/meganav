@@ -39,8 +39,8 @@
 
     function getItemEntities (items) {
         _.each(items, function (item) {
-            if (item.id) {
-                meganavResource.getById(item.id).then(function (response) {
+            if (item.udi) {
+                meganavResource.getByUdi(item.udi).then(function (response) {
                     angular.extend(item, response.data);
                 });
 
@@ -75,6 +75,7 @@
     function buildNavItem (data) {
         return {
             id: data.id,
+            udi: data.udi,
             name: data.name,
             title: data.title,
             target: data.target,

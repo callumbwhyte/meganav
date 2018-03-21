@@ -12,7 +12,6 @@ namespace Cogworks.Meganav.Helpers
             var dataTypeService = context.Services.DataTypeService;
 
             var preValueCollection = dataTypeService.GetPreValuesCollectionByDataTypeId(dataTypeId);
-
             return preValueCollection.PreValuesAsDictionary.ToDictionary(x => x.Key, x => x.Value.Value);
         }
     }

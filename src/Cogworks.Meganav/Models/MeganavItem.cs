@@ -1,17 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cogworks.Meganav.Enums;
 using Newtonsoft.Json;
+using Umbraco.Core;
 using Umbraco.Core.Models;
 
 namespace Cogworks.Meganav.Models
 {
     public class MeganavItem
     {
+        [Obsolete("Use Udi instead")]
         public int Id { get; set; }
         
         public string Title { get; set; }
 
         public string Target { get; set; }
+
+        public GuidUdi Udi { get; set; }
 
         public string Url { get; set; }
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Cogworks.Meganav.Enums
+﻿namespace Cogworks.Meganav.Enums
 {
     public enum ItemType
     {

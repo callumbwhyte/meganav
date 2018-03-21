@@ -25,7 +25,7 @@
 
     function nodeSelectHandler (ev, args) {
         if (!args.node.metaData.listViewNode) {
-            meganavResource.getById(args.node.id).then(function (response) {
+            meganavResource.getByUdi(args.node.udi).then(function (response) {
                 angular.extend($scope.target, response.data);
             });
         }

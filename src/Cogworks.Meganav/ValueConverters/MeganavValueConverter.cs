@@ -26,14 +26,12 @@ namespace Cogworks.Meganav.ValueConverters
         public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
         {
             var sourceString = source?.ToString();
-
             if (string.IsNullOrWhiteSpace(sourceString))
             {
                 return null;
             }
 
             var preValues = PreValueHelper.GetPreValues(propertyType.DataTypeId);
-
             if (preValues.ContainsKey("removeNaviHideItems"))
             {
                 RemoveNaviHideItems = preValues["removeNaviHideItems"] == "1";
@@ -42,7 +40,6 @@ namespace Cogworks.Meganav.ValueConverters
             try
             {
                 var items = JsonConvert.DeserializeObject<IEnumerable<MeganavItem>>(sourceString);
-
                 return BuildMenu(items);
             }
             catch (Exception ex)
@@ -56,16 +53,14 @@ namespace Cogworks.Meganav.ValueConverters
         internal IEnumerable<MeganavItem> BuildMenu(IEnumerable<MeganavItem> items, int level = 0)
         {
             items = items.ToList();
-
             foreach (var item in items)
             {
                 item.Level = level;
 
                 // it's likely a content item
-                if (item.Id > 0)
-                {
-                    var umbracoContent = UmbracoContext.Current.ContentCache.GetById(item.Id);
-
+                if (item.Udi != null)
+                {             
+                    var umbracoContent = UmbracoContext.Current.ContentCache.GetById(item.Udi.Guid);
                     if (umbracoContent != null)
                     {
                         // set item type
@@ -85,21 +80,19 @@ namespace Cogworks.Meganav.ValueConverters
                         {
                             item.Title = umbracoContent.Name;
                         }
-                    } 
+                    }
                 }
 
                 // process child items
                 if (item.Children.Any())
                 {
                     var childLevel = item.Level + 1;
-
                     BuildMenu(item.Children, childLevel);
                 }
             }
 
             // remove unpublished content items
             items = items.Where(x => x.Content != null || x.ItemType == ItemType.Link);
-
             return items;
         }
     }
