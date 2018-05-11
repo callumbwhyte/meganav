@@ -118,7 +118,7 @@
   // Create/Update Nav Item
   function buildNavItem(data, old) {
     var defaults = {
-      id: "",
+      id: 0,
       name: "",
       title: "",
       target: "",
