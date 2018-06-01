@@ -75,10 +75,19 @@ module.exports = function(grunt) {
         },
         nugetpack: {
             dist: {
-                src: projectDir + pkg.name + '.csproj',
+                src: projectDir + pkg.name + '.nuspec',
                 dest: releaseDir + 'nuget/',
                 options: {
-                    properties: 'Platform=AnyCPU;Configuration=Release'
+                    properties: 'Platform=AnyCPU;Configuration=Release;Author=' + assembly.company + ';Id=' + assembly.title + ';Title=' + assembly.title + ';Description=' + assembly.description + ';Copyright=' + assembly.copyright,
+                    version: pkg.version
+                }
+            },
+            core: {
+                src: projectDir + pkg.name + '.Core.nuspec',
+                dest: releaseDir + 'nuget/',
+                options: {
+                    properties: 'Platform=AnyCPU;Configuration=Release;Author=' + assembly.company + ';Id=' + assembly.title + ';Title=' + assembly.title + ' Core;Description=' + assembly.description + ';Copyright=' + assembly.copyright,
+                    version: pkg.version
                 }
             }
         }

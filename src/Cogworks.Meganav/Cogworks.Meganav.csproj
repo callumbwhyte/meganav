@@ -40,6 +40,7 @@
     <Compile Include="Web\Controllers\API\MeganavApiController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Cogworks.Meganav.Core.nuspec" />
     <None Include="Cogworks.Meganav.nuspec" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">

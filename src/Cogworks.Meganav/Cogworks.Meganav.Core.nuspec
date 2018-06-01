@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>$id$</id>
+    <id>$id$.Core</id>
     <version>$version$</version>
     <title>$title$</title>
     <authors>$author$</authors>
@@ -18,6 +18,5 @@
   </metadata>
   <files>
     <file src="bin\$configuration$\$id$.dll" target="lib/net452"/>
-    <file src="Web\UI\**\*.*" target="content" />
   </files>
 </package>
