@@ -282,6 +282,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web\UI\App_Plugins\Meganav\Lang\en-GB.xml" />
+    <Content Include="Web\UI\App_Plugins\Meganav\Lang\nl.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
