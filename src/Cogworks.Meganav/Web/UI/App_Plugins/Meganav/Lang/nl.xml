@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="nl" intName="Dutch" localName="Nederlands" lcid="19" culture="nl-NL">
+  <!-- Meganav item settings -->
+  <area alias="settings">
+    <!-- Link url -->
+    <key alias="linkUrl_label">Url van de link</key>
+    <key alias="linkUrl_placeholder">Url van de link</key>
+    <!-- Link title -->
+    <key alias="linkTitle_label">Titel van de link</key>
+    <key alias="linkTitle_description">De titel om weer te geven voor de link, standaard nodenaam</key>
+    <key alias="linkTitle_placeholder">Geef een naam in...</key>
+    <!-- Link target -->
+    <key alias="linkTarget_label">Target van de link</key>
+    <key alias="linkTarget_option_blankLabel">Open het gelinkte document in een nieuw venster of tabblad</key>
+    <key alias="linkTarget_option_topLabel">Open het gelinkte document in het huidige kader</key>
+    <key alias="linkTarget_option_parentLabel">Open het gelinkte document in het bovenliggende kader</key>
+  </area>
+</language>
