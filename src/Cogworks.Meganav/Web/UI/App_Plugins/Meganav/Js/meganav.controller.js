@@ -2,7 +2,7 @@
 
     $scope.items = [];
     
-    if ($scope.model.value) {
+    if (!_.isEmpty($scope.model.value)) {
         // retreive the saved items
         $scope.items = $scope.model.value;
 
