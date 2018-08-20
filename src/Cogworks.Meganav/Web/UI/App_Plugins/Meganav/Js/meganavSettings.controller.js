@@ -6,6 +6,9 @@
 
     if (!_.isEmpty($scope.model.value)) {
         $scope.dialogOptions.currentTarget = $scope.model.value;
+
+        // v7.12 hack due to controller checking wrong variable
+        $scope.model.url = $scope.model.value.url;
     }
 
     $scope.$on("formSubmitting", function (ev, args) {
