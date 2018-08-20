@@ -4,7 +4,7 @@
         currentTarget: null
     };
 
-    if ($scope.model.value) {
+    if (!_.isEmpty($scope.model.value)) {
         $scope.dialogOptions.currentTarget = $scope.model.value;
     }
 
