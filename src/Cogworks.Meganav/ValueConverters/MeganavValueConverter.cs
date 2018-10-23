@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cogworks.Meganav.Enums;
+using Cogworks.Meganav.Helpers;
 using Cogworks.Meganav.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
@@ -16,6 +16,8 @@ namespace Cogworks.Meganav.ValueConverters
     [PropertyValueType(typeof(IEnumerable<MeganavItem>))]
     public class MeganavValueConverter : PropertyValueConverterBase
     {
+        private bool RemoveNaviHideItems;
+
         public override bool IsConverter(PublishedPropertyType propertyType)
         {
             return propertyType.PropertyEditorAlias.Equals(Constants.PropertyEditorAlias);
@@ -23,9 +25,23 @@ namespace Cogworks.Meganav.ValueConverters
 
         public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
         {
+            var sourceString = source?.ToString();
+
+            if (string.IsNullOrWhiteSpace(sourceString))
+            {
+                return null;
+            }
+
+            var preValues = PreValueHelper.GetPreValues(propertyType.DataTypeId);
+
+            if (preValues.ContainsKey("removeNaviHideItems"))
+            {
+                RemoveNaviHideItems = preValues["removeNaviHideItems"] == "1";
+            }
+
             try
             {
-                var items = JsonConvert.DeserializeObject<IEnumerable<MeganavItem>>(source.ToString());
+                var items = JsonConvert.DeserializeObject<IEnumerable<MeganavItem>>(sourceString);
 
                 return BuildMenu(items);
             }
@@ -43,12 +59,8 @@ namespace Cogworks.Meganav.ValueConverters
 
             foreach (var item in items)
             {
-                if (item.Config == null)
-                {
-                    item.Config = new Dictionary<string, object>();
-                }
-               
                 item.Level = level;
+
                 // it's likely a content item
                 if (item.Id > 0)
                 {
@@ -56,23 +68,24 @@ namespace Cogworks.Meganav.ValueConverters
 
                     if (umbracoContent != null)
                     {
-                        // test if umbracoNaviHide is available
-                        var umbracoNaviHide = false;
-                        if (umbracoContent.HasProperty("umbracoNaviHide"))
+                        // set item type
+                        item.ItemType = ItemType.Content;
+
+                        // skip item if umbracoNaviHide enabled
+                        if (RemoveNaviHideItems && !umbracoContent.IsVisible())
                         {
-                            umbracoNaviHide = umbracoContent.GetPropertyValue<bool>("umbracoNaviHide");
+                            continue;
                         }
 
-                        item.ItemType = ItemType.Content;
+                        // set content to node
                         item.Content = umbracoContent;
-                        item.NaviHide = umbracoNaviHide;
-                    }
-                    else
-                    {
-                        // item is not in umbraco cache, so not published, remove item from nav
-                        items = items.Where(x => x.Id != item.Id);
-                        continue;
-                    }
+
+                        // set title to node name if no override is set
+                        if (string.IsNullOrWhiteSpace(item.Title))
+                        {
+                            item.Title = umbracoContent.Name;
+                        }
+                    } 
                 }
 
                 // process child items
@@ -83,6 +96,9 @@ namespace Cogworks.Meganav.ValueConverters
                     BuildMenu(item.Children, childLevel);
                 }
             }
+
+            // remove unpublished content items
+            items = items.Where(x => x.Content != null || x.ItemType == ItemType.Link);
 
             return items;
         }

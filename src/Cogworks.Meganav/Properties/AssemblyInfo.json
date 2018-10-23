@@ -3,8 +3,8 @@
   "description": "A flexible, draggable link picker for constructing site navigation menus, big or small, in Umbraco 7.",
   "company": "Cogworks",
   "product": "Umbraco Meganav",
-  "copyright": "Copyright © 2017",
-  "version": "1.0.1",
+  "copyright": "Copyright © 2018",
+  "version": "1.1.2",
   "informationalVersion": null,
-  "fileVersion": "1.0.1"
+  "fileVersion": "1.1.2"
 }

@@ -1,5 +1,6 @@
 {
   "name": "Cogworks.Meganav",
+  "version": "1.1.2",
   "url": "https://github.com/thecogworks/meganav",
   "license": {
     "name": "MIT",
@@ -7,7 +8,7 @@
   },
   "author": {
     "name": "Cogworks",
-    "url": "http://www.thecogworks.com/"
+    "url": "https://thecogworks.com/"
   },
   "readme": "A flexible, draggable link picker for constructing site navigation menus, big or small, in Umbraco 7.",
   "devDependencies": {

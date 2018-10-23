@@ -2,12 +2,20 @@
 .umb-node-preview-add {
   max-width: 100%;
 }
-/* Fade unpublished items */
-.umb-node-preview--unpublished {
+/* Fade unpublished and hidden items */
+.umb-node-preview--unpublished,
+.umb-node-preview--navihide {
   opacity: .5;
 }
-.umb-node-preview--unpublished + .angular-ui-tree-nodes {
+.umb-node-preview--unpublished + .angular-ui-tree-nodes,
+.umb-node-preview--navihide + .angular-ui-tree-nodes {
   opacity: .5;
+}
+/* Highlight hidden items */
+.umb-node-preview--navihide,
+.umb-node-preview--navihide:hover {
+  border: 1px dotted;
+  border-color: red;
 }
 /* Angular UI Tree */
 .angular-ui-tree-nodes {

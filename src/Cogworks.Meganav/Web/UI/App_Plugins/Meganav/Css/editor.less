@@ -3,13 +3,21 @@
     max-width: 100%;
 }
 
-/* Fade unpublished items */
-.umb-node-preview--unpublished {
+/* Fade unpublished and hidden items */
+.umb-node-preview--unpublished,
+.umb-node-preview--navihide {
     opacity: .5;
 
     + .angular-ui-tree-nodes {
         opacity: .5;
     }
+}
+
+/* Highlight hidden items */
+.umb-node-preview--navihide,
+.umb-node-preview--navihide:hover {
+    border: 1px dotted;
+    border-color: red;
 }
 
 /* Fade unpublished items and add red border to show difference with unpublished items */
