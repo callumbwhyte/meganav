@@ -62,9 +62,9 @@ namespace Cogworks.Meganav.ValueConverters
                 item.Level = level;
 
                 // it's likely a content item
-                if (item.Id > 0)
+                if (item.Udi != null)
                 {
-                    var umbracoContent = UmbracoContext.Current.ContentCache.GetById(item.Id);
+                    var umbracoContent = UmbracoContext.Current.ContentCache.GetById(item.Udi.Guid);
 
                     if (umbracoContent != null)
                     {

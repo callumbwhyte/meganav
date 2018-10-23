@@ -1,10 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <language alias="en" intName="English (UK)" localName="English (UK)" lcid="" culture="en-GB">
-    <creator>
-        <name>The Umbraco community</name>
-        <link>http://our.umbraco.org</link>
-    </creator>
-    <area alias="general">
-        <key alias="config">Config</key>
-    </area>
+  <!-- Meganav item settings -->
+  <area alias="settings">
+    <!-- Link url -->
+    <key alias="linkUrl_label">Link Url</key>
+    <key alias="linkUrl_placeholder">Link Url</key>
+    <!-- Link title -->
+    <key alias="linkTitle_label">Link Title</key>
+    <key alias="linkTitle_description">The title to display for the link, defaults to node name</key>
+    <key alias="linkTitle_placeholder">Enter a name...</key>
+    <!-- Link target -->
+    <key alias="linkTarget_label">Link Target</key>
+    <key alias="linkTarget_option_blankLabel">Opens the linked document in a new window or tab</key>
+    <key alias="linkTarget_option_topLabel">Opens the linked document in the full body of the window</key>
+    <key alias="linkTarget_option_parentLabel">Opens the linked document in the parent frame</key>
+  </area>
 </language>

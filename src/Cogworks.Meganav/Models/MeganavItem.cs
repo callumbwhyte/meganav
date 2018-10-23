@@ -2,6 +2,7 @@
 using Cogworks.Meganav.Converters;
 using Cogworks.Meganav.Enums;
 using Newtonsoft.Json;
+using Umbraco.Core;
 using Umbraco.Core.Models;
 
 namespace Cogworks.Meganav.Models
@@ -9,6 +10,7 @@ namespace Cogworks.Meganav.Models
     public class MeganavItem : IMeganavItem
     {
         public int Id { get; set; }
+        public GuidUdi Udi { get; set; }
 
         public string Title { get; set; }
 
