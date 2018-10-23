@@ -31,6 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Converters\ChildConverter.cs" />
+    <Compile Include="Enums\IMeganavItem.cs" />
     <Compile Include="Enums\MeganavItem.cs" />
     <Compile Include="Converters\DictionaryConverter.cs" />
     <Compile Include="Helpers\PreValueHelper.cs" />
@@ -57,17 +59,16 @@
       <DependentUpon>umb-node-preview.less</DependentUpon>
     </None>
     <None Include="Web\UI\App_Plugins\Meganav\Js\angular-ui-tree.js" />
-    <Content Include="Web\UI\App_Plugins\Meganav\Js\meganav.prevalue.controller.js" />
+    <Content Include="Web\UI\App_Plugins\Meganav\Js\meganavPrevalue.controller.js" />
     <None Include="Web\UI\App_Plugins\Meganav\Js\meganav.resource.js" />
     <None Include="Web\UI\App_Plugins\Meganav\Js\meganav.controller.js" />
     <None Include="Web\UI\App_Plugins\Meganav\Js\meganavSettings.controller.js" />
     <Content Include="Web\UI\App_Plugins\Meganav\lang\en-GB.xml" />
     <Content Include="Web\UI\App_Plugins\Meganav\lang\en-US.xml" />
-    <Content Include="Web\UI\App_Plugins\Meganav\Views\configdialog.html" />
     <None Include="Web\UI\App_Plugins\Meganav\Views\editor.html" />
     <None Include="Web\UI\App_Plugins\Meganav\Views\settings.html" />
     <None Include="Web\UI\Views\Partials\ExampleNavigation.cshtml" />
-    <Content Include="Web\UI\App_Plugins\Meganav\Views\prevalue-editor.html" />
+    <Content Include="Web\UI\App_Plugins\Meganav\Views\prevalues.html" />
     <None Include="Web\UI\App_Plugins\Meganav\package.manifest" />
   </ItemGroup>
   <ItemGroup>

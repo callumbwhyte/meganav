@@ -27,11 +27,11 @@
     });
 
     function nodeSelectHandler (ev, args) {
-        if (!args.node.metaData.listViewNode) {
-            meganavResource.getById(args.node.id).then(function (response) {
-                angular.extend($scope.target, response.data);
+        //if (!args.node.metaData.listViewNode) {
+        meganavResource.getById(args.node.id).then(function (response) {
+            angular.extend($scope.dialogOptions.currentTarget, response.data);
             });
-        }
+       // }
     }
 }
 

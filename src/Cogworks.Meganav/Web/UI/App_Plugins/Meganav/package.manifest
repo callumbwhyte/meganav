@@ -1,8 +1,8 @@
 ﻿{
   "javascript": [
     "~/App_Plugins/Meganav/js/meganav.controller.js",
-    "~/App_Plugins/Meganav/js/meganav.prevalue.controller.js",
     "~/App_Plugins/Meganav/js/meganavSettings.controller.js",
+    "~/App_Plugins/Meganav/js/meganavPrevalue.controller.js",
     "~/App_Plugins/Meganav/js/meganav.resource.js",
     "~/App_Plugins/Meganav/js/angular-ui-tree.js"
   ],

@@ -1,8 +1,7 @@
-﻿function Meganav($scope, dialogService, meganavResource, angularHelper) {
+﻿function Meganav($scope, meganavResource) {
 
     $scope.items = [];
-    var currentForm = angularHelper.getCurrentForm($scope);
-    
+
     if (!_.isEmpty($scope.model.value)) {
         // retreive the saved items
         $scope.items = $scope.model.value;
@@ -11,62 +10,12 @@
         getItemEntities($scope.items);
     }
 
-
-    $scope.editMenuItemSettings = function (menuItem) {
-
-        var config = angular.copy($scope.model.config.settings);
-
-        $scope.meganavSettingsOverlay = {};
-        $scope.meganavSettingsOverlay.view = "/App_Plugins/Meganav/Views/configdialog.html";
     $scope.add = function () {
         openSettings(null, function (model) {
             // add item to scope
             $scope.items.push(buildNavItem(model.value));
         });
     };
-
-        $scope.meganavSettingsOverlay.title = "Settings";
-        $scope.meganavSettingsOverlay.show = true;
-
-        $scope.meganavSettingsOverlay.settings = config;
-
-        if (angular.isObject(menuItem.config)) {
-            _.each(config, function (cfg) {
-                var val = menuItem.config[cfg.key];
-                if (val) {
-                    cfg.value = val;
-                }
-            });
-        }
-
-        $scope.meganavSettingsOverlay.submit = function (model) {
-            var configObject = {};
-
-            _.each(model.settings,
-                function (cfg) {
-                    if (cfg.value) {
-                        configObject[cfg.key] = cfg.value;
-                    }
-                });
-
-            menuItem.config = configObject;
-
-            currentForm.$setDirty();
-
-            $scope.meganavSettingsOverlay.show = false;
-            $scope.meganavSettingsOverlay = null;
-        };
-
-        $scope.meganavSettingsOverlay.close = function (oldModel) {
-            $scope.meganavSettingsOverlay.show = false;
-            $scope.meganavSettingsOverlay = null;
-        };
-
-    }
-
-    $scope.config = function (item) {
-        $scope.editMenuItemSettings(item);
-    }
 
     $scope.edit = function (item) {
         openSettings(item, function (model) {
@@ -81,14 +30,12 @@
     };
 
     $scope.isVisible = function (item) {
-        return $scope.model.config.removeNaviHideItems == true ? item.naviHide !== true : true;
+        return $scope.model.config.removeNaviHideItems === true ? item.naviHide !== true : true;
     };
 
     $scope.$on("formSubmitting", function (ev, args) {
         $scope.model.value = $scope.items;
     });
-
-
 
     function getItemEntities(items) {
         _.each(items, function (item) {
@@ -104,42 +51,40 @@
         });
     }
 
-    function openSettings (item, callback) {
+    function openSettings(item, callback) {
         // assign value to new empty object to break refs
         // prevent accidentally changing old values
         $scope.settingsOverlay = {
             title: "Settings",
             view: "/App_Plugins/Meganav/Views/settings.html",
             show: true,
+            properties: $scope.model.config.properties,
             value: angular.extend({}, item),
-            submit: function (model) {
+            submit: function(model) {
                 !callback || callback(model);
                 // close settings
                 closeSettings();
             }
-        }
+        };
     }
 
-    function closeSettings () {
+    function closeSettings() {
         $scope.settingsOverlay.show = false;
         $scope.settingsOverlay = null;
     }
 
-    function buildNavItem (data) {
-
+    function buildNavItem(data) {
         return {
             id: data.id,
-            title: data.name,
             name: data.name,
             title: data.title,
             target: data.target,
             url: data.url || "#",
             children: data.children || [],
             icon: data.icon || "icon-link",
-            published: data.published,
-            config: []
+            published: true,
             naviHide: data.naviHide
-        }
+        };
     }
 }
 

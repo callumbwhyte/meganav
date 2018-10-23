@@ -3,7 +3,7 @@
     <ng-form name="meganavEditorForm">
 
         <!-- meganav sortable tree -->
-        <div ui-tree data-max-depth="{{model.config.maxDepth}}">
+        <div ui-tree="treeOptions" data-max-depth="{{model.config.maxDepth}}">
 
             <ol ui-tree-nodes ng-model="items">
 
@@ -23,8 +23,7 @@
     <!-- repeatable nav item template -->
     <script type="text/ng-template" id="nav_item_template.html">
 
-        <div ui-tree-handle class="umb-node-preview umb-node-preview--sortable" ng-class="{'umb-node-preview--unpublished': item.published === false, 'umb-node-preview--navihide': item.navihide === true}">
-             ng-class="{'umb-node-preview--unpublished': item.published === false, 'umb-node-preview--navihide': isVisible(item) === false}">
+        <div ui-tree-handle class="umb-node-preview umb-node-preview--sortable" ng-class="{'umb-node-preview--unpublished': item.published === false, 'umb-node-preview--navihide': isVisible(item) === false}">
 
             <i ng-if="item.icon" class="umb-node-preview__icon {{item.icon}}"></i>
 
@@ -43,10 +42,6 @@
             </div>
 
             <div class="umb-node-preview__actions">
-
-                <a href="" class="umb-node-preview__action" ng-click="config(item)" data-nodrag>
-                    <i class="icon-settings"></i>
-                </a>
 
                 <a href="" class="umb-node-preview__action" ng-click="edit(item)" data-nodrag>
                     <localize key="general_edit">Edit</localize>
@@ -72,12 +67,6 @@
     <umb-overlay ng-if="settingsOverlay.show"
                  model="settingsOverlay"
                  view="settingsOverlay.view"
-                 position="right">
-    </umb-overlay>
-
-    <umb-overlay ng-if="meganavSettingsOverlay.show"
-                 model="meganavSettingsOverlay"
-                 view="meganavSettingsOverlay.view"
                  position="right">
     </umb-overlay>
 
