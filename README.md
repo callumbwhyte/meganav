@@ -8,7 +8,7 @@ A flexible, draggable link picker for constructing site navigation menus, big or
 
 ## Getting started
 
-This package is supported on Umbraco 7.4+.
+This package is supported on Umbraco 7.6.2+.
 
 ### Installation
 
@@ -76,6 +76,7 @@ Meganav uses a _slightly_ modified version of [Angular UI Tree](https://github.c
 * [Arnold Visser](https://twitter.com/aim24)
 * [Robin Neal](https://twitter.com/SudoCat429)
 * [Lee Kelleher](https://twitter.com/leekelleher)
+* [kows] (https://github.com/kows)
 
 ## License
 

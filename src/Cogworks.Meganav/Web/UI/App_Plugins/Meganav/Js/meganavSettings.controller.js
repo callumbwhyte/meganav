@@ -9,7 +9,7 @@
 
         // v7.12 hack due to controller checking wrong variable
         $scope.model.url = $scope.model.value.url;
-    }
+    };
 
     $scope.$on("formSubmitting", function (ev, args) {
         $scope.model.value = $scope.target;
@@ -27,11 +27,11 @@
     });
 
     function nodeSelectHandler (ev, args) {
-        //if (!args.node.metaData.listViewNode) {
+        if (!args.node.metaData.listViewNode) {
         meganavResource.getByUdi(args.node.udi).then(function (response) {
             angular.extend($scope.dialogOptions.currentTarget, response.data);
             });
-       // }
+       }
     }
 }
 

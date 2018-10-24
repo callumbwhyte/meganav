@@ -1,6 +1,7 @@
 ﻿function Meganav($scope, meganavResource) {
 
     $scope.items = [];
+    $scope.propertyFields = $scope.model.config.properties || [];
 
     if (!_.isEmpty($scope.model.value)) {
         // retreive the saved items
@@ -52,16 +53,32 @@
     }
 
     function openSettings(item, callback) {
-        // assign value to new empty object to break refs
-        // prevent accidentally changing old values
+        // Update Properties appropriately
+        if (!angular.isObject(item.properties)) {
+            item.properties = {};
+        }
+
+        // Get available property fields
+        var props = angular.copy($scope.propertyFields)
+            .filter(isPropertyFieldEnabled, item)
+            .map(setPropertyFieldValue, item);
+
+        // Clone original item so our changes aren't live
+        clonedItem = angular.copy(item);
+
+        // Assign value to new empty object to break refs
+        // Prevent accidentally auto changing old values
         $scope.settingsOverlay = {
             title: "Settings",
             view: "/App_Plugins/Meganav/Views/settings.html",
             show: true,
-            properties: $scope.model.config.properties,
-            value: angular.extend({}, item),
+            value: clonedItem,
+            properties: props,
             submit: function(model) {
+                // Update Properties
+                model.value.properties = getItemProperties(model.value, model.properties);
                 !callback || callback(model);
+
                 // close settings
                 closeSettings();
             }
@@ -73,19 +90,45 @@
         $scope.settingsOverlay = null;
     }
 
-    function buildNavItem(data) {
+    function buildNavItem(model) {
         return {
-            id: data.id,
-            udi: data.udi,
-            name: data.name,
-            title: data.title,
-            target: data.target,
-            url: data.url || "#",
-            children: data.children || [],
-            icon: data.icon || "icon-link",
+            id: model.id,
+            udi: model.udi,
+            name: model.name,
+            title: model.title,
+            target: model.target,
+            url: model.url || "#",
+            children: model.children || [],
+            icon: model.icon || "icon-link",
             published: true,
-            naviHide: data.naviHide
+            naviHide: model.naviHide,
+            properties: model.properties
         };
+    }
+
+    // Check if property field should be enabled for current item
+    function isPropertyFieldEnabled(prop) {
+        return (
+            angular.isUndefined(prop.applyTo) ||
+                !angular.isArray(prop.applyTo) ||
+                !prop.applyTo.length ||
+                prop.applyTo.indexOf(this.level || 0) >= 0
+        );
+    }
+
+    // Set the items values on the property field
+    function setPropertyFieldValue(prop) {
+        var val = this.properties[prop.key];
+        prop.value = val;
+        return prop;
+    }
+
+    // Get the properties for an item from an array of property fields
+    function getItemProperties(item, props) {
+        props = _.isEmpty(props) ? $scope.propertyFields : props;
+        return props
+            .filter(isPropertyFieldEnabled, item)
+            .reduce(function(props, p) { return (props[p.key] = p.value, props) }, {});
     }
 }
 

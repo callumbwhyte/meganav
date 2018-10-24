@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.0] - 2018-20-08
+### ADDED
+* Udi support
+* Configurable Properties per treeitem
+
+### Changed
+* Re-targeting package to Umbraco 7.6.2+
+
+
 ## [1.1.2] - 2018-20-08
 ### Fixed
 * Nav item settings dialog not functioning in Umbraco v7.12
