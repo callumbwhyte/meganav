@@ -11,12 +11,12 @@ namespace Cogworks.Meganav.Models
     {
         public int Id { get; set; }
         public GuidUdi Udi { get; set; }
-
         public string Title { get; set; }
 
         public string Target { get; set; }
 
         public string Url { get; set; }
+        public string Anchor { get; set; }
 
         [JsonIgnore]
         public IPublishedContent Content { get; set; }
@@ -26,8 +26,8 @@ namespace Cogworks.Meganav.Models
 
         #region Internal
 
-        [JsonConverter(typeof(ChildConverter<IMeganavItem>))]
-        public IEnumerable<IMeganavItem> Children { get; set; }
+        [JsonConverter(typeof(ChildConverter<MeganavItem>))]
+        public IEnumerable<MeganavItem> Children { get; set; }
 
         [JsonIgnore]
         public ItemType ItemType { get; set; }

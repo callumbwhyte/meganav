@@ -17,13 +17,15 @@ namespace Cogworks.Meganav.Models
         string Title { get; set; }
         string Target { get; set; }
         string Url { get; set; }
+        string Anchor { get; set; }
+
         [JsonIgnore]
         IPublishedContent Content { get; set; }
         [JsonConverter(typeof(DictionaryConverter))]
         IDictionary<string, object> Properties { get; set; }
         #region Internal
         [JsonConverter(typeof(ChildConverter<MeganavItem>))]
-        IEnumerable<IMeganavItem> Children { get; set; }
+        IEnumerable<MeganavItem> Children { get; set; }
         [JsonIgnore]
         ItemType ItemType { get; set; }
         [JsonIgnore]

@@ -31,7 +31,7 @@ namespace Cogworks.Meganav.ValueConverters
             {
                 return null;
             }
-
+            
             var preValues = PreValueHelper.GetPreValues(propertyType.DataTypeId);
 
             if (preValues.ContainsKey("removeNaviHideItems"))

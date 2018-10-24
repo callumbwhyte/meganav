@@ -98,7 +98,7 @@
             title: "",
             target: "",
             url: "#",
-            achor: "",
+            anchor: "",
             level: 0,
             children: data.children || [],
             icon: "icon-link",
