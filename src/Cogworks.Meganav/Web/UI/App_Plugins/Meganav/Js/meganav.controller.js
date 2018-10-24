@@ -12,7 +12,7 @@
     }
 
     $scope.add = function () {
-        openSettings(null, function (model) {
+        openSettings({}, function (model) {
             // add item to scope
             $scope.items.push(buildNavItem(model.value));
         });
@@ -90,20 +90,22 @@
         $scope.settingsOverlay = null;
     }
 
-    function buildNavItem(model) {
-        return {
-            id: model.id,
-            udi: model.udi,
-            name: model.name,
-            title: model.title,
-            target: model.target,
-            url: model.url || "#",
-            children: model.children || [],
-            icon: model.icon || "icon-link",
+    // Create/Update Nav Item
+    function buildNavItem(data, old) {
+        var defaults = {
+            id: 0,
+            name: "",
+            title: "",
+            target: "",
+            url: "#",
+            achor: "",
+            level: 0,
+            children: data.children || [],
+            icon: "icon-link",
             published: true,
-            naviHide: model.naviHide,
-            properties: model.properties
+            naviHide: data.naviHide
         };
+        return angular.extend(old || defaults, data);
     }
 
     // Check if property field should be enabled for current item

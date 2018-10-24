@@ -1,15 +1,15 @@
 ﻿function MeganavSettings($scope, $controller, meganavResource) {
-
+    
     $scope.dialogOptions = {
         currentTarget: null
     };
-
-    if (!_.isEmpty($scope.model.value)) {
+    
+    if (!_.isEmpty($scope.model.value.url)) {
         $scope.dialogOptions.currentTarget = $scope.model.value;
 
         // v7.12 hack due to controller checking wrong variable
         $scope.model.url = $scope.model.value.url;
-    };
+    } 
 
     $scope.$on("formSubmitting", function (ev, args) {
         $scope.model.value = $scope.target;
