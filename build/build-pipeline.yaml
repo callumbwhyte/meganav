@@ -1,0 +1,52 @@
+pool:
+  name: Hosted VS2017
+  demands: msbuild
+
+name: $(packageVersion)$(Rev:.r)
+
+variables:
+  buildConfiguration: 'Release'
+  packageName: 'Our.Umbraco.Meganav'
+
+trigger: none
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Use latest NuGet'
+
+- task: NuGetCommand@2
+  displayName: 'Restore NuGet packages'
+  inputs:
+    restoreSolution: '**\$(packageName).csproj'
+
+- task: MSBuild@1
+  displayName: 'Build package'
+  inputs:
+    solution: '**\$(packageName).csproj'
+    configuration: '$(buildConfiguration)'
+    msbuildArguments: '/p:Version=$(Build.BuildNumber) /p:PackageVersion=$(packageVersion) /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)\nuget'
+    clean: true
+
+- task: CopyFiles@2
+  displayName: 'Copy package files'
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: |
+     **\bin\$(buildConfiguration)\**\$(packageName).dll
+     **\Web\UI\**
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\files'
+    CleanTargetFolder: true
+    OverWrite: true
+    flattenFolders: true
+
+- task: ArchiveFiles@2
+  displayName: 'Zip package files'
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\files'
+    includeRootFolder: false
+    archiveFile: '$(Build.ArtifactStagingDirectory)\zip\$(packageName).v$(packageVersion).zip'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifacts'
+  inputs:
+    ArtifactName: '$(packageName).$(Build.BuildNumber)'
