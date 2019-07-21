@@ -1,0 +1,31 @@
+﻿<div class="meganav" ng-controller="Our.Umbraco.Meganav.PropertyEditors.EditorController as vm">
+
+    <div ui-tree="vm.treeOptions" data-empty-placeholder-enabled="false">
+        <ol ng-model="vm.items" ui-tree-nodes>
+            <li ng-repeat="item in vm.items" ng-include="'node.html'" ui-tree-node></li>
+        </ol>
+    </div>
+
+    <button type="button" class="btn-reset umb-node-preview-add" ng-click="vm.addItem()" ng-if="!vm.maxItems || vm.maxItems > vm.items.length">
+        <localize key="general_add">Add</localize>
+    </button>
+
+    <script type="text/ng-template" id="node.html">
+        <div class="meganav-item-wrapper" ui-tree-handle>
+            <div class="meganav-item-container">
+                <div class="meganav-item btn-reset umb-outline flex items-center">
+                    <umb-node-preview icon="item.icon || 'icon-link'"
+                                      name="item.title || item.name"
+                                      description="item.url || '#'"
+                                      published="item.visible && item.published">
+                    </umb-node-preview>
+                </div>
+            </div>
+        </div>
+
+        <ol ng-model="item.children" ui-tree-nodes>
+            <li ng-repeat="item in item.children" ng-include="'node.html'" ui-tree-node></li>
+        </ol>
+    </script>
+
+</div>

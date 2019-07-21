@@ -1,0 +1,12 @@
+﻿{
+  "css": [
+    "/App_Plugins/Meganav/lib/angular-ui-tree.min.css",
+    "/App_Plugins/Meganav/backoffice/meganav.css"
+  ],
+  "javascript": [
+    "/App_Plugins/Meganav/lib/angular-ui-tree.min.js",
+    "/App_Plugins/Meganav/backoffice/dialogs/settingsDialog.controller.js",
+    "/App_Plugins/Meganav/backoffice/dialogs/settingsDialog.link.controller.js",
+    "/App_Plugins/Meganav/backoffice/propertyeditors/editor.controller.js"
+  ]
+}

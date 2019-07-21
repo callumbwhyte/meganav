@@ -1,0 +1,36 @@
+﻿.meganav .umb-node-preview-add {
+    max-width: 100%;
+    border-radius: 3px;
+}
+
+.meganav .angular-ui-tree-placeholder {
+    border: 1px dashed #bbbabf;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.meganav-item-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.meganav-item-container {
+    display: block;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    border: 1px solid #e9e9eb;
+    border-radius: 3px;
+    transition: border-color .12s, background-color .12s;
+}
+
+.meganav-item {
+    font-weight: 400;
+    background-color: #fff;
+    width: 100%;
+    min-height: 48px;
+    color: #1b264f;
+    padding-left: 10px;
+    text-align: left;
+    user-select: none;
+    box-sizing: border-box;
+}

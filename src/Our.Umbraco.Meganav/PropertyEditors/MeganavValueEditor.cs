@@ -17,6 +17,7 @@ namespace Our.Umbraco.Meganav.PropertyEditors
 
         public MeganavValueEditor(IContentService contentService)
         {
+            View = "/App_Plugins/Meganav/backoffice/propertyeditors/editor.html";
             ValueType = "JSON";
 
             _contentService = contentService;
