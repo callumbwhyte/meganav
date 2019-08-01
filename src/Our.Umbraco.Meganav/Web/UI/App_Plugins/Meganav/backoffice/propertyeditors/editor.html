@@ -12,7 +12,10 @@
 
     <script type="text/ng-template" id="node.html">
         <div class="meganav-item-wrapper" ui-tree-handle>
-            <meganav-preview item="item"></meganav-preview>
+            <meganav-preview item="item"
+                             collapsed="collapsed"
+                             on-collapse="toggle()">
+            </meganav-preview>
 
             <meganav-actions item="item"
                              on-edit="vm.editItem(item)"
@@ -20,7 +23,7 @@
             </meganav-actions>
         </div>
 
-        <ol ng-model="item.children" ui-tree-nodes>
+        <ol ng-model="item.children" ng-show="!collapsed" ui-tree-nodes>
             <li ng-repeat="item in item.children" ng-include="'node.html'" ui-tree-node></li>
         </ol>
     </script>

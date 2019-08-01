@@ -9,6 +9,10 @@
     box-sizing: border-box;
 }
 
+.meganav .caret--right {
+    transform: rotate(-90deg);
+}
+
 .meganav-item-wrapper {
     position: relative;
     width: 100%;

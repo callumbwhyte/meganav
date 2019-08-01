@@ -28,6 +28,23 @@
                 };
 
                 vm.$onInit = function () {
+                    if ($scope.umbProperty) {
+                        var propertyActions = [
+                            {
+                                labelKey: "actions_expandAll",
+                                icon: "arrow-down",
+                                method: expandAll
+                            },
+                            {
+                                labelKey: "actions_collapseAll",
+                                icon: "arrow-up",
+                                method: collapseAll
+                            }
+                        ];
+
+                        $scope.umbProperty.setPropertyActions(propertyActions);
+                    }
+
                     $scope.$on("formSubmitting", () => {
                         $scope.model.value = vm.items;
                     });
@@ -63,6 +80,14 @@
                         settings: item.settings || {},
                         children: item.children || []
                     };
+                }
+
+                function expandAll() {
+                    $scope.$broadcast("angular-ui-tree:expand-all");
+                }
+
+                function collapseAll() {
+                    $scope.$broadcast("angular-ui-tree:collapse-all");
                 }
 
             });

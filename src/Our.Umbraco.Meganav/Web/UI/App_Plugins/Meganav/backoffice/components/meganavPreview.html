@@ -1,5 +1,18 @@
 ﻿<div class="meganav-item-container">
     <div class="meganav-item btn-reset umb-outline flex items-center">
+        <button type="button"
+                class="btn-reset flex items-center self-stretch w1"
+                title="actions_toggleCollapse"
+                localize="title"
+                ng-click="vm.onCollapse(vm.item)"
+                ng-if="vm.onCollapse && vm.item.children.length"
+                data-nodrag>
+            <span class="caret" ng-class="{'caret--right': vm.collapsed}"></span>
+            <span class="sr-only">
+                <localize key="actions_toggleCollapse">Toggle collapse</localize>
+            </span>
+        </button>
+
         <umb-node-preview icon="vm.item.icon || 'icon-link'"
                           name="vm.item.title || vm.item.name"
                           description="vm.item.url || '#'"
