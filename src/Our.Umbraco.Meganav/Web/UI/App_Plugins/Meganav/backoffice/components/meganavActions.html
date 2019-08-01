@@ -1,6 +1,17 @@
 ﻿<div class="meganav-actions" data-nodrag>
     <button type="button"
             class="btn-reset umb-outline"
+            title="actions_toggleVisibility"
+            localize="title"
+            ng-click="vm.toggleVisibility()">
+        <i class="icon icon-eye" aria-hidden="true"></i>
+        <span class="sr-only">
+            <localize key="actions_toggleVisibility">Toggle visibility</localize>
+        </span>
+    </button>
+
+    <button type="button"
+            class="btn-reset umb-outline"
             title="general_settings"
             localize="title"
             ng-click="vm.onEdit(vm.item)"

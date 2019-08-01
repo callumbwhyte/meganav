@@ -34,3 +34,32 @@
     user-select: none;
     box-sizing: border-box;
 }
+
+.meganav-actions {
+    background-color: hsla(0, 0%, 100%, .96);
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 0 5px;
+    border-radius: 16px;
+    opacity: 0;
+    transition: opacity .12s;
+    z-index: 999999999;
+}
+
+.meganav-actions > * {
+    font-size: 18px;
+    display: inline-block;
+    position: relative;
+    color: #1b264f;
+    padding: 5px;
+}
+
+.meganav-actions > *:hover {
+    color: #2152a3;
+}
+
+.meganav-item-wrapper:focus > meganav-actions > .meganav-actions,
+.meganav-item-wrapper:hover > meganav-actions > .meganav-actions {
+    opacity: 1;
+}
