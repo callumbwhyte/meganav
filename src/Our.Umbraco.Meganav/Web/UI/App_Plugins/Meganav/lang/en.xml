@@ -3,6 +3,7 @@
   <area alias="actions">
     <key alias="collapseAll">Collapse all</key>
     <key alias="expandAll">Expand all</key>
+    <key alias="populateContent">Populate from tree</key>
     <key alias="toggleCollapse">Toggle collapse</key>
     <key alias="toggleVisibility">Toggle visibility</key>
   </area>

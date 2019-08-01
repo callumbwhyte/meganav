@@ -4,7 +4,7 @@
 
     angular.module("umbraco")
         .controller("Our.Umbraco.Meganav.PropertyEditors.EditorController",
-            function ($scope, editorService) {
+            function ($scope, $routeParams, editorService, contentResource) {
 
                 var vm = this;
 
@@ -39,6 +39,11 @@
                                 labelKey: "actions_collapseAll",
                                 icon: "arrow-up",
                                 method: collapseAll
+                            },
+                            {
+                                labelKey: "actions_populateContent",
+                                icon: "filter-arrows",
+                                method: populateContent
                             }
                         ];
 
@@ -88,6 +93,20 @@
 
                 function collapseAll() {
                     $scope.$broadcast("angular-ui-tree:collapse-all");
+                }
+
+                function populateContent() {
+                    contentResource.getChildren($routeParams.id, { cultureName: $scope.model.culture })
+                        .then(result => {
+                            result.items.forEach(content => {
+                                contentResource.getNiceUrl(content.id)
+                                    .then(url => {
+                                        var item = createItem(content);
+                                        item.url = url;
+                                        vm.items.push(item);
+                                    });
+                            });
+                        });
                 }
 
             });
