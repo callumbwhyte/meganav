@@ -1,0 +1,25 @@
+﻿<div class="meganav-actions" data-nodrag>
+    <button type="button"
+            class="btn-reset umb-outline"
+            title="general_settings"
+            localize="title"
+            ng-click="vm.onEdit(vm.item)"
+            ng-if="vm.onEdit">
+        <i class="icon icon-settings" aria-hidden="true"></i>
+        <span class="sr-only">
+            <localize key="general_settings">Settings</localize>
+        </span>
+    </button>
+
+    <button type="button"
+            class="btn-reset umb-outline"
+            title="actions_delete"
+            localize="title"
+            ng-click="vm.onRemove(vm.item)"
+            ng-if="vm.onRemove">
+        <i class="icon icon-trash" aria-hidden="true"></i>
+        <span class="sr-only">
+            <localize key="general_delete">Delete</localize>
+        </span>
+    </button>
+</div>

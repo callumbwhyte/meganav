@@ -21,6 +21,12 @@
                     });
                 };
 
+                vm.editItem = function (item) {
+                    openSettings(item, function (model) {
+                        angular.extend(item, model.value);
+                    });
+                };
+
                 vm.$onInit = function () {
                     $scope.$on("formSubmitting", () => {
                         $scope.model.value = vm.items;

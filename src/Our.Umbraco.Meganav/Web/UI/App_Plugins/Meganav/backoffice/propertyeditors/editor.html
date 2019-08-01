@@ -12,15 +12,12 @@
 
     <script type="text/ng-template" id="node.html">
         <div class="meganav-item-wrapper" ui-tree-handle>
-            <div class="meganav-item-container">
-                <div class="meganav-item btn-reset umb-outline flex items-center">
-                    <umb-node-preview icon="item.icon || 'icon-link'"
-                                      name="item.title || item.name"
-                                      description="item.url || '#'"
-                                      published="item.visible && item.published">
-                    </umb-node-preview>
-                </div>
-            </div>
+            <meganav-preview item="item"></meganav-preview>
+
+            <meganav-actions item="item"
+                             on-edit="vm.editItem(item)"
+                             on-remove="remove()">
+            </meganav-actions>
         </div>
 
         <ol ng-model="item.children" ui-tree-nodes>
