@@ -6,9 +6,14 @@
   "javascript": [
     "/App_Plugins/Meganav/lib/angular-ui-tree.min.js",
     "/App_Plugins/Meganav/backoffice/components/meganavActions.component.js",
+    "/App_Plugins/Meganav/backoffice/components/meganavItemType.component.js",
     "/App_Plugins/Meganav/backoffice/components/meganavPreview.component.js",
+    "/App_Plugins/Meganav/backoffice/dialogs/itemTypeDialog.controller.js",
     "/App_Plugins/Meganav/backoffice/dialogs/settingsDialog.controller.js",
     "/App_Plugins/Meganav/backoffice/dialogs/settingsDialog.link.controller.js",
+    "/App_Plugins/Meganav/backoffice/dialogs/settingsDialog.settings.controller.js",
+    "/App_Plugins/Meganav/backoffice/helpers/dialogHelper.service.js",
+    "/App_Plugins/Meganav/backoffice/propertyeditors/configuration.controller.js",
     "/App_Plugins/Meganav/backoffice/propertyeditors/editor.controller.js"
   ]
 }

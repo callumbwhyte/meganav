@@ -1,0 +1,76 @@
+﻿<div ng-controller="Our.Umbraco.Meganav.Dialogs.ItemTypeDialogController as vm">
+
+    <umb-load-indicator ng-if="vm.loading"></umb-load-indicator>
+
+    <umb-editor-view ng-if="!vm.loading">
+
+        <umb-editor-header name="'Settings'"
+                           name-required="false"
+                           name-locked="true"
+                           navigation="vm.tabs"
+                           hide-alias="true"
+                           hide-icon="true"
+                           hide-description="true">
+        </umb-editor-header>
+
+        <umb-editor-container>
+            <umb-box>
+                <umb-box-content>
+                    <umb-control-group label="@general_name" required="true">
+                        <input type="text" name="name" class="umb-property-editor" ng-model="vm.itemType.name" />
+                    </umb-control-group>
+
+                    <umb-control-group label="@general_icon">
+                        <umb-node-preview name="vm.itemType.icon"
+                                          icon="vm.itemType.icon"
+                                          allow-edit="true"
+                                          allow-remove="true"
+                                          on-edit="vm.addIcon()"
+                                          on-remove="vm.removeIcon()"
+                                          ng-if="vm.itemType.icon">
+                        </umb-node-preview>
+
+                        <button type="button" class="umb-node-preview-add" ng-click="vm.addIcon()" ng-if="!vm.itemType.icon">
+                            <localize key="general_choose">Choose</localize>
+                        </button>
+                    </umb-control-group>
+
+                    <umb-control-group label="@general_settingsType">
+                        <umb-node-preview name="vm.settingsElementType.name"
+                                          description="vm.settingsElementType.alias"
+                                          icon="vm.settingsElementType.icon"
+                                          allow-edit="true"
+                                          allow-remove="true"
+                                          on-edit="vm.addSettingsType()"
+                                          on-remove="vm.removeSettingsType()"
+                                          ng-if="vm.settingsElementType">
+                        </umb-node-preview>
+
+                        <button type="button" class="umb-node-preview-add" ng-click="vm.addSettingsType()" ng-if="!vm.settingsElementType">
+                            <localize key="general_choose">Choose</localize>
+                        </button>
+                    </umb-control-group>
+                </umb-box-content>
+            </umb-box>
+        </umb-editor-container>
+
+        <umb-editor-footer>
+            <umb-editor-footer-content-right>
+                <umb-button action="vm.close()"
+                            shortcut="esc"
+                            button-style="link"
+                            label-key="general_close"
+                            type="button">
+                </umb-button>
+
+                <umb-button action="vm.save()"
+                            button-style="primary"
+                            label-key="buttons_save"
+                            type="button">
+                </umb-button>
+            </umb-editor-footer-content-right>
+        </umb-editor-footer>
+
+    </umb-editor-view>
+
+</div>

@@ -13,6 +13,8 @@ namespace Our.Umbraco.Meganav.Models
 
         int Level { get; }
 
+        IMeganavItemType ItemType { get; }
+
         IPublishedContent Content { get; }
 
         IPublishedElement Settings { get; }

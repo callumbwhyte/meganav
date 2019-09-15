@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Umbraco.Core;
 
 namespace Our.Umbraco.Meganav.Models
@@ -14,6 +15,8 @@ namespace Our.Umbraco.Meganav.Models
         bool Visible { get; }
 
         GuidUdi Udi { get; }
+
+        Guid? ItemTypeId { get; }
 
         IDictionary<string, object> Settings { get; }
 

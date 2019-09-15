@@ -1,0 +1,16 @@
+﻿<div class="meganav-card" ng-click="vm.onEdit(vm.type)">
+    <div class="meganav-card-icon flex justify-center items-center">
+        <umb-icon icon="{{vm.type.icon || 'icon-link'}}"></umb-icon>
+    </div>
+
+    <div class="meganav-card-title">{{vm.type.name}}</div>
+
+    <div class="meganav-actions">
+        <button type="button" class="btn-reset" ng-click="vm.onRemove(vm.type)" ng-if="vm.onRemove">
+            <i class="icon icon-trash" aria-hidden="true"></i>
+            <span class="sr-only">
+                <localize key="general_delete">Delete</localize>
+            </span>
+        </button>
+    </div>
+</div>

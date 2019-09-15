@@ -10,6 +10,8 @@
 
                 vm.items = $scope.model.value || [];
 
+                vm.itemTypes = $scope.model.config.itemTypes || [];
+
                 vm.maxItems = $scope.model.config.maxItems;
 
                 vm.treeOptions = {};
@@ -28,6 +30,15 @@
                 };
 
                 vm.$onInit = function () {
+                    var setItemTypes = function (items) {
+                        items.forEach(item => {
+                            item.itemType = getItemType(item);
+                            setItemTypes(item.children);
+                        })
+                    };
+
+                    setItemTypes(vm.items);
+
                     if ($scope.umbProperty) {
                         var propertyActions = [
                             {
@@ -85,6 +96,14 @@
                         settings: item.settings || {},
                         children: item.children || []
                     };
+                }
+
+                function getItemType(item) {
+                    if (vm.itemTypes.length == 1) {
+                        return vm.itemTypes[0];
+                    } else {
+                        return vm.itemTypes.find(x => x.id == item.itemTypeId);
+                    }
                 }
 
                 function expandAll() {

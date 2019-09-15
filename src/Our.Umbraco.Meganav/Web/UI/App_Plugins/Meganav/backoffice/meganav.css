@@ -3,7 +3,8 @@
     border-radius: 3px;
 }
 
-.meganav .angular-ui-tree-placeholder {
+.meganav .angular-ui-tree-placeholder,
+.meganav .meganav-placeholder {
     border: 1px dashed #bbbabf;
     border-radius: 3px;
     box-sizing: border-box;
@@ -11,6 +12,36 @@
 
 .meganav .caret--right {
     transform: rotate(-90deg);
+}
+
+.meganav-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: minmax(160px, auto);
+    grid-gap: 20px;
+}
+
+.meganav-card {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+    cursor: pointer;
+}
+
+.meganav-card-icon {
+    font-size: 42px;
+    background-color: #f9f9fa;
+    padding: 40px;
+}
+
+.meganav-card-title {
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 16px;
+    color: #1b264f;
 }
 
 .meganav-item-wrapper {
@@ -63,6 +94,8 @@
     color: #2152a3;
 }
 
+.meganav-card:focus .meganav-actions,
+.meganav-card:hover .meganav-actions,
 .meganav-item-wrapper:focus > meganav-actions > .meganav-actions,
 .meganav-item-wrapper:hover > meganav-actions > .meganav-actions {
     opacity: 1;

@@ -1,0 +1,17 @@
+﻿<div class="meganav" ng-controller="Our.Umbraco.Meganav.PropertyEditors.ConfigurationController as vm">
+
+    <div class="meganav-card-grid" ui-sortable="vm.sortableOptions" ng-model="vm.types">
+
+        <meganav-item-type type="type"
+                           on-edit="vm.editType(type)"
+                           on-remove="vm.removeType(type)"
+                           ng-repeat="type in vm.types">
+        </meganav-item-type>
+
+        <button type="button" class="btn-reset umb-node-preview-add" ng-click="vm.addType()">
+            <localize key="general_add">Add</localize>
+        </button>
+
+    </div>
+
+</div>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Umbraco.Core;
 
@@ -21,6 +22,9 @@ namespace Our.Umbraco.Meganav.Models
 
         [DataMember(Name = "udi")]
         public GuidUdi Udi { get; set; }
+
+        [DataMember(Name = "itemTypeId")]
+        public Guid? ItemTypeId { get; set; }
 
         [DataMember(Name = "settings")]
         public IDictionary<string, object> Settings { get; set; }

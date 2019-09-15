@@ -19,6 +19,9 @@ namespace Our.Umbraco.Meganav.Models
         [DataMember(Name = "level")]
         public int Level { get; set; }
 
+        [DataMember(Name = "itemType")]
+        public IMeganavItemType ItemType { get; set; }
+
         [DataMember(Name = "content")]
         public IPublishedContent Content { get; set; }
 
