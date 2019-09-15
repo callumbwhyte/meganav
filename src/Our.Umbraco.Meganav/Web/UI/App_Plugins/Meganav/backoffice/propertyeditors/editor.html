@@ -11,11 +11,15 @@
     </button>
 
     <script type="text/ng-template" id="node.html">
-        <div class="meganav-item-wrapper" ui-tree-handle>
-            <meganav-preview item="item"
-                             collapsed="collapsed"
-                             on-collapse="toggle()">
-            </meganav-preview>
+        <div class="meganav-item-wrapper">
+            <div ng-include="item.itemType.view" ng-if="item.itemType && item.itemType.view"></div>
+
+            <div ng-if="!item.itemType || !item.itemType.view" ui-tree-handle>
+                <meganav-preview item="item"
+                                 collapsed="collapsed"
+                                 on-collapse="toggle()">
+                </meganav-preview>
+            </div>
 
             <meganav-actions item="item"
                              on-edit="vm.editItem(item)"
@@ -23,9 +27,11 @@
             </meganav-actions>
         </div>
 
-        <ol ng-model="item.children" ng-show="!collapsed" ui-tree-nodes>
-            <li ng-repeat="item in item.children" ng-include="'node.html'" ui-tree-node></li>
-        </ol>
+        <div ng-if="!item.itemType || !item.itemType.view">
+            <ol ng-model="item.children" ng-show="!collapsed" ui-tree-nodes>
+                <li ng-repeat="item in item.children" ng-include="'node.html'" ui-tree-node></li>
+            </ol>
+        </div>
     </script>
 
 </div>

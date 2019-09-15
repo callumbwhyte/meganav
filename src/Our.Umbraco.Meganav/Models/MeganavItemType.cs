@@ -18,6 +18,9 @@ namespace Our.Umbraco.Meganav.Models
         [DataMember(Name = "icon")]
         public string Icon { get; set; }
 
+        [DataMember(Name = "view")]
+        public string View { get; set; }
+
         [DataMember(Name = "settingsType")]
         public Guid? SettingsType { get; set; }
     }

@@ -50,6 +50,21 @@
                             <localize key="general_choose">Choose</localize>
                         </button>
                     </umb-control-group>
+
+                    <umb-control-group label="@general_view">
+                        <umb-node-preview name="vm.itemType.view"
+                                          icon="'icon-document'"
+                                          allow-edit="true"
+                                          allow-remove="true"
+                                          on-edit="vm.addView()"
+                                          on-remove="vm.removeView()"
+                                          ng-if="vm.itemType.view">
+                        </umb-node-preview>
+
+                        <button type="button" class="umb-node-preview-add" ng-click="vm.addView()" ng-if="!vm.itemType.view">
+                            <localize key="general_choose">Choose</localize>
+                        </button>
+                    </umb-control-group>
                 </umb-box-content>
             </umb-box>
         </umb-editor-container>

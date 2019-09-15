@@ -51,6 +51,24 @@
                     vm.itemType.settingsType = null;
                 };
 
+                vm.addView = function () {
+                    dialogHelper.filePicker({
+                        title: "Choose view",
+                        extension: ".html",
+                        select: function (node) {
+                            vm.itemType.view = "/" + decodeURIComponent(node.id);
+                            editorService.close();
+                        },
+                        close: function () {
+                            editorService.close();
+                        }
+                    });
+                };
+
+                vm.removeView = function () {
+                    vm.itemType.view = null;
+                };
+
                 vm.close = function () {
                     if ($scope.model && $scope.model.close) {
                         $scope.model.close();

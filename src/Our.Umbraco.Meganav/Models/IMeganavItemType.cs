@@ -12,6 +12,8 @@ namespace Our.Umbraco.Meganav.Models
 
         string Icon { get; }
 
+        string View { get; }
+
         Guid? SettingsType { get; }
     }
 }
