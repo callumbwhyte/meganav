@@ -12,6 +12,10 @@
 
                 vm.itemType = $scope.model.value;
 
+                vm.itemTypes = $scope.model.context.itemTypes;
+
+                vm.allowAllTypes = !vm.itemType.allowedTypes || vm.itemType.allowedTypes.length <= 0;
+
                 vm.addIcon = function () {
                     editorService.iconPicker({
                         title: "Choose icon",
@@ -67,6 +71,20 @@
 
                 vm.removeView = function () {
                     vm.itemType.view = null;
+                };
+
+                vm.toggleAllowedType = function (itemType) {
+                    var position = vm.itemType.allowedTypes.findIndex(x => x === itemType.id);
+                    if (position !== -1) {
+                        vm.itemType.allowedTypes.splice(position, 1);
+                    } else {
+                        vm.itemType.allowedTypes.push(itemType.id);
+                    }
+                };
+
+                vm.toggleAllowAllTypes = function () {
+                    vm.allowAllTypes = !vm.allowAllTypes;
+                    vm.itemType.allowedTypes = [];
                 };
 
                 vm.close = function () {

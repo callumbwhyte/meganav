@@ -14,7 +14,11 @@
 
                 vm.maxItems = $scope.model.config.maxItems;
 
-                vm.treeOptions = {};
+                vm.treeOptions = {
+                    accept: function (source, dest) {
+                        return isAllowedType(source.item, dest.item);
+                    }
+                };
 
                 vm.addItem = function () {
                     var item = createItem();
@@ -104,6 +108,19 @@
                     } else {
                         return vm.itemTypes.find(x => x.id == item.itemTypeId);
                     }
+                }
+
+                function getAllowedTypes(item) {
+                    if (item && item.itemType && item.itemType.allowedTypes.length) {
+                        return vm.itemTypes.filter(x => item.itemType.allowedTypes.includes(x.id));
+                    } else {
+                        return vm.itemTypes.filter(x => x.allowAtRoot);
+                    }
+                }
+
+                function isAllowedType(item, parentItem) {
+                    var allowedTypes = getAllowedTypes(parentItem);
+                    return allowedTypes.length == 0 || item.itemType == null || allowedTypes.some(x => x.id == item.itemType.id);
                 }
 
                 function expandAll() {

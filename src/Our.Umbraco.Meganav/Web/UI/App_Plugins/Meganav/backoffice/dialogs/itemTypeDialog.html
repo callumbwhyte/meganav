@@ -67,6 +67,42 @@
                     </umb-control-group>
                 </umb-box-content>
             </umb-box>
+
+            <umb-box>
+                <umb-box-header title="Permissions"></umb-box-header>
+
+                <umb-box-content>
+                    <umb-control-group label="@general_allowAtRoot">
+                        <umb-toggle checked="vm.itemType.allowAtRoot"
+                                    on-click="vm.itemType.allowAtRoot = !vm.itemType.allowAtRoot"
+                                    show-labels="true"
+                                    label-on="Allow at root"
+                                    label-off="Allow at root"
+                                    label-position="right">
+                        </umb-toggle>
+                    </umb-control-group>
+
+                    <umb-control-group label="@general_allowedTypes">
+                        <umb-toggle checked="vm.allowAllTypes"
+                                    on-click="vm.toggleAllowAllTypes()"
+                                    show-labels="true"
+                                    label-on="Allow all types"
+                                    label-off="Allow chosen types"
+                                    label-position="right">
+                        </umb-toggle>
+
+                        <div ng-if="!vm.allowAllTypes">
+                            <umb-checkbox ng-repeat="itemType in vm.itemTypes"
+                                          model="vm.itemType.allowedTypes.includes(itemType.id)"
+                                          name="allowedTypes"
+                                          value="{{itemType.id}}"
+                                          text="{{itemType.name}}"
+                                          on-change="vm.toggleAllowedType(itemType)">
+                            </umb-checkbox>
+                        </div>
+                    </umb-control-group>
+                </umb-box-content>
+            </umb-box>
         </umb-editor-container>
 
         <umb-editor-footer>

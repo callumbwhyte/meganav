@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Our.Umbraco.Meganav.Models
@@ -23,5 +24,11 @@ namespace Our.Umbraco.Meganav.Models
 
         [DataMember(Name = "settingsType")]
         public Guid? SettingsType { get; set; }
+
+        [DataMember(Name = "allowAtRoot")]
+        public bool AllowAtRoot { get; set; } = true;
+
+        [DataMember(Name = "allowedTypes")]
+        public IEnumerable<Guid> AllowedTypes { get; set; } = new List<Guid>();
     }
 }

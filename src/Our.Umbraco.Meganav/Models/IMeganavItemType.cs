@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Our.Umbraco.Meganav.Models
 {
@@ -15,5 +16,9 @@ namespace Our.Umbraco.Meganav.Models
         string View { get; }
 
         Guid? SettingsType { get; }
+
+        bool AllowAtRoot { get; }
+
+        IEnumerable<Guid> AllowedTypes { get; }
     }
 }
