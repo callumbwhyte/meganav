@@ -26,11 +26,12 @@
                             type="button">
                 </umb-button>
 
-                <umb-button action="vm.save()"
-                            button-style="primary"
-                            label-key="general_save"
-                            type="button">
-                </umb-button>
+                <umb-button-group default-button="vm.saveButton"
+                                  sub-buttons="vm.actionButtons"
+                                  direction="up"
+                                  float="right"
+                                  button-style="primary">
+                </umb-button-group>
             </umb-editor-footer-content-right>
         </umb-editor-footer>
 

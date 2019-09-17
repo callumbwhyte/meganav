@@ -39,8 +39,9 @@
                     }
                 };
 
-                vm.editItem = function (item) {
-                    openSettings(item, function (model) {
+                vm.editItem = function (item, parentItem) {
+                    var allowedTypes = getAllowedTypes(parentItem);
+                    openSettings(item, allowedTypes, function (model) {
                         angular.extend(item, model.value);
                     });
                 };
@@ -100,9 +101,12 @@
                     });
                 }
 
-                function openSettings(item, callback) {
+                function openSettings(item, itemTypes, callback) {
                     editorService.open({
                         value: angular.copy(item),
+                        context: {
+                            itemTypes: itemTypes
+                        },
                         view: "/App_Plugins/Meganav/backoffice/dialogs/settingsDialog.html",
                         size: "small",
                         submit: function (model) {

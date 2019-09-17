@@ -22,7 +22,7 @@
             </div>
 
             <meganav-actions item="item"
-                             on-edit="vm.editItem(item)"
+                             on-edit="vm.editItem(item, $parentNodeScope.item)"
                              on-remove="remove()">
             </meganav-actions>
         </div>

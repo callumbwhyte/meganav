@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <language alias="en" intName="English" localName="English" lcid="" culture="en">
   <area alias="actions">
+    <key alias="changeType">Change type</key>
     <key alias="collapseAll">Collapse all</key>
     <key alias="expandAll">Expand all</key>
     <key alias="populateContent">Populate from tree</key>
