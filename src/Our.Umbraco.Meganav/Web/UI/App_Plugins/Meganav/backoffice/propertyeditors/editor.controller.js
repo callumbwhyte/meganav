@@ -4,7 +4,7 @@
 
     angular.module("umbraco")
         .controller("Our.Umbraco.Meganav.PropertyEditors.EditorController",
-            function ($scope, $routeParams, editorService, contentResource) {
+            function ($scope, $routeParams, overlayService, editorService, contentResource) {
 
                 var vm = this;
 
@@ -20,11 +20,23 @@
                     }
                 };
 
-                vm.addItem = function () {
+                vm.addItem = function (parentItem) {
                     var item = createItem();
-                    openSettings(item, function () {
-                        items.push(model.value);
-                    });
+                    var callback = function (model) {
+                        vm.items.push(model.value);
+                    };
+                    var allowedTypes = getAllowedTypes(parentItem);
+                    if (allowedTypes.length > 1) {
+                        openChooseType(allowedTypes, function (model) {
+                            item.itemType = model.selectedItem;
+                            item.itemTypeId = model.selectedItem.id;
+                            openSettings(item, allowedTypes, callback);
+                        });
+                    } else {
+                        item.itemType = allowedTypes[0];
+                        item.itemTypeId = item.itemType?.id;
+                        openSettings(item, allowedTypes, callback);
+                    }
                 };
 
                 vm.editItem = function (item) {
@@ -69,6 +81,24 @@
                         $scope.model.value = vm.items;
                     });
                 };
+
+                function openChooseType(allowedTypes, callback) {
+                    overlayService.open({
+                        title: "Choose type",
+                        availableItems: allowedTypes,
+                        filter: false,
+                        view: "itempicker",
+                        submit: function (model) {
+                            if (callback) {
+                                callback(model);
+                            }
+                            overlayService.close();
+                        },
+                        close: function () {
+                            overlayService.close();
+                        }
+                    });
+                }
 
                 function openSettings(item, callback) {
                     editorService.open({
