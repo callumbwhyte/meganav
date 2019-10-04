@@ -1,74 +1,48 @@
-﻿<div ng-controller="Cogworks.Meganav.MeganavController" class="umb-editor">
+﻿<div ng-controller="Cogworks.Meganav.MeganavController" class="umb-property-editor umb-contentpicker">
 
     <ng-form name="meganavEditorForm">
 
         <!-- meganav sortable tree -->
         <div ui-tree data-max-depth="{{model.config.maxDepth}}">
 
-            <ol ui-tree-nodes ng-model="items">
-
-                <li ng-repeat="item in items" ui-tree-node ng-include="'nav_item_template.html'"></li>
-
+            <ol ui-tree-nodes ng-model="renderModel">
+                <li ng-repeat="item in renderModel" ui-tree-node ng-include="'nodes_renderer.html'"></li>
             </ol>
 
         </div>
 
         <!-- add nav items -->
-        <a href="" class="umb-node-preview-add" ng-click="add()" prevent-default>
+        <a href class="umb-node-preview-add" ng-click="openLinkPicker()" prevent-default>
             <localize key="general_add">Add</localize>
         </a>
-        
+
     </ng-form>
 
-    <!-- repeatable nav item template -->
-    <script type="text/ng-template" id="nav_item_template.html">
-
+    <script type="text/ng-template" id="nodes_renderer.html">
         <div ui-tree-handle class="umb-node-preview umb-node-preview--sortable"
              ng-class="{'umb-node-preview--unpublished': item.published === false, 'umb-node-preview--navihide': isVisible(item) === false}">
 
-            <i ng-if="item.icon" class="umb-node-preview__icon {{item.icon}}"></i>
-
+            <i ng-if="item.icon" class="umb-node-preview__icon {{ item.icon }}"></i>
             <div class="umb-node-preview__content">
 
-                <div class="umb-node-preview__name">
-                    {{item.title || item.name}}
-                </div>
+                <div class="umb-node-preview__name" ng-attr-title="{{item.alias}}">{{ item.name }}</div>
+                <div class="umb-node-preview__description" ng-if="item.description">{{ item.description }}</div>
 
-                <div class="umb-node-preview__description">
-                    <a href="{{item.url}}" target="_blank" data-nodrag>
-                        {{item.url}}
-                    </a>
+                <div class="umb-user-group-preview__permissions" ng-if="item.permissions">
+                    <span>
+                        <span class="bold"><localize key="general_rights">Permissions</localize>:</span>
+                        <span ng-repeat="permission in item.permissions" class="umb-user-group-preview__permission">{{ permission.name }}</span>
+                    </span>
                 </div>
-
             </div>
-
             <div class="umb-node-preview__actions">
-
-                <a href="" class="umb-node-preview__action" ng-click="edit(item)" data-nodrag>
-                    <localize key="general_edit">Edit</localize>
-                </a>
-
-                <a href="" class="umb-node-preview__action" ng-click="remove(item)" data-nodrag>
-                    <localize key="general_delete">Delete</localize>
-                </a>
-
+                <a data-nodrag class="umb-node-preview__action" title="Edit" ng-href="{{editUrl}}" ng-click="openLinkPicker(item, $index)"><localize key="general_edit">Edit</localize></a>
+                <a data-nodrag class="umb-node-preview__action umb-node-preview__action--red" title="Remove" ng-href="{{removeUrl}}" ng-click="onRemove(item)"><localize key="general_remove">Remove</localize></i></a>
             </div>
-
         </div>
-
-        <ol ui-tree-nodes ng-model="item.children">
-
-            <li ng-repeat="item in item.children" ui-tree-node ng-include="'nav_item_template.html'"></li>
-
+        <ol ui-tree-nodes="" ng-model="item.children" ng-class="{hidden: collapsed}">
+            <li ng-repeat="item in item.children" ui-tree-node ng-include="'nodes_renderer.html'">
+            </li>
         </ol>
-
     </script>
-
-    <!-- nav item settings overlay -->
-    <umb-overlay ng-if="settingsOverlay.show"
-                 model="settingsOverlay"
-                 view="settingsOverlay.view"
-                 position="right">
-    </umb-overlay>
-
 </div>

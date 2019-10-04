@@ -1,66 +1,75 @@
-﻿.umb-node-preview,
-.umb-node-preview-add {
-  max-width: 100%;
-}
-/* Fade unpublished and hidden items */
-.umb-node-preview--unpublished,
-.umb-node-preview--navihide {
-  opacity: .5;
-}
-.umb-node-preview--unpublished + .angular-ui-tree-nodes,
-.umb-node-preview--navihide + .angular-ui-tree-nodes {
-  opacity: .5;
-}
-/* Highlight hidden items */
+﻿/* Highlight hidden items */
 .umb-node-preview--navihide,
 .umb-node-preview--navihide:hover {
   border: 1px dotted;
   border-color: red;
 }
 /* Angular UI Tree */
+.angular-ui-tree {
+  margin-bottom: 8px;
+}
+.angular-ui-tree-empty,
+.angular-ui-tree-dropzone {
+  border: 1px dashed #bbb;
+  min-height: 100px;
+  background-color: #e5e5e5;
+  background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+  background-image: -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+  background-image: linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+}
+.angular-ui-tree-empty {
+  pointer-events: none;
+}
 .angular-ui-tree-nodes {
   position: relative;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.angular-ui-tree-nodes a:link[data-nodrag] {
-  cursor: pointer;
-}
 .angular-ui-tree-nodes .angular-ui-tree-nodes {
   padding-left: 20px;
+}
+.angular-ui-tree-node,
+.angular-ui-tree-placeholder {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-height: 20px;
+  line-height: 20px;
 }
 .angular-ui-tree-hidden {
   display: none;
 }
-.angular-ui-tree-node,
-.angular-ui-tree-placeholder {
-  line-height: 20px;
-  position: relative;
-  min-height: 20px;
-  margin: 0;
-  padding: 0;
-}
 .angular-ui-tree-placeholder {
   background: #f8f8f8;
   min-height: 30px;
-  margin: 5px 0;
+  margin: 0 0 6px;
   padding: 0;
   border: 2px dashed #d9d9d9;
   box-sizing: border-box;
-  opacity: .5;
+  opacity: 0.5;
 }
 .angular-ui-tree-handle {
-  line-height: 20px;
-  min-height: 20px;
-  padding: 10px 15px;
-  text-decoration: none;
-  box-sizing: border-box;
   cursor: move;
+  text-decoration: none;
+  font-weight: bold;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 20px;
+  line-height: 20px;
+  background: #f8f8f8;
+  padding: 5px 15px;
+  margin-bottom: 5px;
 }
 .angular-ui-tree-drag {
   position: absolute;
-  opacity: .8;
   pointer-events: none;
   z-index: 999;
+  opacity: 0.8;
+}
+.angular-ui-tree-drag .tree-node-content {
+  margin-top: 0;
 }

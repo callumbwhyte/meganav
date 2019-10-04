@@ -1,12 +1,37 @@
 ﻿{
+  "propertyEditors": [
+    {
+      "alias": "Cogworks.Meganav",
+      "name": "Meganav",
+      "group": "Pickers",
+      "icon": "icon-sitemap",
+      "editor": {
+        "view": "~/App_Plugins/Meganav/views/editor.html",
+        "valueType": "JSON"
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Max Depth",
+            "description": "The maximum number of levels in the navigation",
+            "key": "maxDepth",
+            "view": "number"
+          },
+          {
+            "label": "Remove NaviHide Items",
+            "description": "Remove items where umbracoNaviHide is true",
+            "key": "removeNaviHideItems",
+            "view": "boolean"
+          }
+        ]
+      }
+    }
+  ],
   "javascript": [
     "~/App_Plugins/Meganav/js/meganav.controller.js",
-    "~/App_Plugins/Meganav/js/meganavSettings.controller.js",
-    "~/App_Plugins/Meganav/js/meganav.resource.js",
     "~/App_Plugins/Meganav/js/angular-ui-tree.js"
   ],
   "css": [
-    "~/App_Plugins/Meganav/css/umb-node-preview.css",
     "~/App_Plugins/Meganav/css/editor.css"
   ]
 }

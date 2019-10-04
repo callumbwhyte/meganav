@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Cogworks.Meganav
+﻿namespace Cogworks.Meganav
 {
     public class Constants
     {

@@ -1,47 +1,34 @@
-﻿function Meganav($scope, meganavResource) {
+﻿function Meganav($scope, angularHelper, entityResource, iconHelper, localizationService, editorService) {
 
-    $scope.items = [];
-    
-    if (!_.isEmpty($scope.model.value)) {
-        // retreive the saved items
-        $scope.items = $scope.model.value;
+    var vm = {
+        labels: {
+            general_recycleBin: ""
+        }
+    };
 
-        // get updated entities for content
-        getItemEntities($scope.items);
+    $scope.renderModel = [];
+
+    if (!Array.isArray($scope.model.value)) {
+        $scope.model.value = [];
     }
 
-    $scope.add = function () {
-        openSettings(null, function (model) {
-            // add item to scope
-            $scope.items.push(buildNavItem(model.value));
-        });
-    };
+    var currentForm = angularHelper.getCurrentForm($scope);
 
-    $scope.edit = function (item) {
-        openSettings(item, function (model) {
-            // update item in scope
-            // assign new values via extend to maintain refs
-            angular.extend(item, buildNavItem(model.value));
-        });
-    };
+    $scope.renderModel = $scope.model.value
 
-    $scope.remove = function (item) {
-        item.remove();
-    };
+    getItemEntities($scope.renderModel);
 
-    $scope.isVisible = function (item) {
-        return $scope.model.config.removeNaviHideItems == true ? item.naviHide !== true : true;
-    };
-
-    $scope.$on("formSubmitting", function (ev, args) {
-        $scope.model.value = $scope.items;
-    });
-
-    function getItemEntities (items) {
+    function getItemEntities(items) {
         _.each(items, function (item) {
-            if (item.id) {
-                meganavResource.getById(item.id).then(function (response) {
-                    angular.extend(item, response.data);
+            if (item.udi) {
+                var entityType = item.udi.indexOf("media") > -1 ? "Media" : "Document";
+                entityResource.getById(item.udi, entityType).then(function (data) {
+                    item.icon = iconHelper.convertFromLegacyIcon(data.icon);
+                    item.published = (data.metaData && data.metaData.IsPublished === false && entityType === "Document") ? false : true;
+                    item.trashed = data.trashed;
+                    if (link.trashed) {
+                        item.url = vm.labels.general_recycleBin;
+                    }
                 });
 
                 if (item.children.length > 0) {
@@ -51,42 +38,110 @@
         });
     }
 
-    function openSettings (item, callback) {
-        // assign value to new empty object to break refs
-        // prevent accidentally changing old values
-        $scope.settingsOverlay = {
-            title: "Settings",
-            view: "/App_Plugins/Meganav/Views/settings.html",
-            show: true,
-            value: angular.extend({}, item),
-            submit: function (model) {
-                !callback || callback(model);
-                // close settings
-                closeSettings();
+    $scope.onRemove = function (item) {
+        remove($scope.renderModel, item);
+
+        currentForm.$setDirty();
+    };
+
+    function remove(renderModel, item) {
+        var model = renderModel;
+        if (model) {
+            for (var i = 0; i < model.length; i++) {
+
+                if (model[i] === item) {
+                    model.splice(i, 1);
+                    return true;
+                } else {
+                    remove(model[i].children, item);
+                }
             }
         }
     }
 
-    function closeSettings () {
-        $scope.settingsOverlay.show = false;
-        $scope.settingsOverlay = null;
+    $scope.isVisible = function (item) {
+        return $scope.model.config.removeNaviHideItems == true ? item.naviHide !== true : true;
+    };
+
+    $scope.$on("formSubmitting", function (ev, args) {
+        $scope.model.value = $scope.renderModel;
+    });
+
+    $scope.openLinkPicker = function (link, $index) {
+        var target = link ? {
+            name: link.name,
+            anchor: link.queryString,
+            udi: link.udi,
+            url: link.url,
+            target: link.target
+        } : null;
+
+        var linkPicker = {
+            currentTarget: target,
+            dataTypeKey: "",
+            ignoreUserStartNodes: true,
+            submit: function (model) {
+                if (model.target.url || model.target.anchor) {
+                    // if an anchor exists, check that it is appropriately prefixed
+                    if (model.target.anchor && model.target.anchor[0] !== '?' && model.target.anchor[0] !== '#') {
+                        model.target.anchor = (model.target.anchor.indexOf('=') === -1 ? '#' : '?') + model.target.anchor;
+                    }
+                    if (link) {
+                        link.udi = model.target.udi;
+                        link.name = model.target.name || model.target.url || model.target.anchor;
+                        link.queryString = model.target.anchor;
+                        link.target = model.target.target;
+                        link.url = model.target.url;
+                    } else {
+                        link = {
+                            name: model.target.name || model.target.url || model.target.anchor,
+                            queryString: model.target.anchor,
+                            target: model.target.target,
+                            udi: model.target.udi,
+                            url: model.target.url
+                        };
+                        $scope.renderModel.push(link);
+                    }
+
+                    link.description = link.url + (link.queryString ? link.queryString : '');
+                    link.children = [];
+
+                    if (link.udi) {
+                        var entityType = model.target.isMedia ? "Media" : "Document";
+
+                        entityResource.getById(link.udi, entityType).then(function (data) {
+                            link.icon = iconHelper.convertFromLegacyIcon(data.icon);
+                            link.published = (data.metaData && data.metaData.IsPublished === false && entityType === "Document") ? false : true;
+                            link.trashed = data.trashed;
+                            if (link.trashed) {
+                                link.url = vm.labels.general_recycleBin;
+                            }
+                        });
+                    } else {
+                        link.icon = "icon-link";
+                        link.published = true;
+                    }
+
+                    currentForm.$setDirty();
+                }
+                editorService.close();
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+        editorService.linkPicker(linkPicker);
+    };
+
+    function init() {
+        localizationService.localizeMany(["general_recycleBin"])
+            .then(function (data) {
+                vm.labels.general_recycleBin = data[0];
+            });
     }
 
-    function buildNavItem (data) {
-        return {
-            id: data.id,
-            name: data.name,
-            title: data.title,
-            target: data.target,
-            url: data.url || "#",
-            children: data.children || [],
-            icon: data.icon || "icon-link",
-            published: true,
-            naviHide: data.naviHide
-        }
-    }
+    init();
 }
 
-angular.module("umbraco").controller("Cogworks.Meganav.MeganavController", Meganav);
-
 app.requires.push("ui.tree");
+angular.module("umbraco").controller("Cogworks.Meganav.MeganavController", Meganav);
