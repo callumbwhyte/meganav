@@ -2,9 +2,5 @@
   {
     "outputFile": "Web/UI/App_Plugins/Meganav/Css/editor.css",
     "inputFile": "Web/UI/App_Plugins/Meganav/Css/editor.less"
-  },
-  {
-    "outputFile": "Web/UI/App_Plugins/Meganav/Css/umb-node-preview.css",
-    "inputFile": "Web/UI/App_Plugins/Meganav/Css/umb-node-preview.less"
   }
 ]
