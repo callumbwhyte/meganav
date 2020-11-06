@@ -4,7 +4,7 @@
 
     <umb-editor-view ng-if="!vm.loading">
 
-        <umb-editor-header name="'Settings'"
+        <umb-editor-header name="vm.labels.settings"
                            name-required="false"
                            name-locked="true"
                            navigation="vm.tabs"
@@ -69,15 +69,15 @@
             </umb-box>
 
             <umb-box>
-                <umb-box-header title="Permissions"></umb-box-header>
+                <umb-box-header title="{{vm.labels.permissions}}"></umb-box-header>
 
                 <umb-box-content>
                     <umb-control-group label="@general_allowAtRoot">
                         <umb-toggle checked="vm.itemType.allowAtRoot"
                                     on-click="vm.itemType.allowAtRoot = !vm.itemType.allowAtRoot"
                                     show-labels="true"
-                                    label-on="Allow at root"
-                                    label-off="Allow at root"
+                                    label-on="{{vm.labels.allowedAtRoot}}"
+                                    label-off="{{vm.labels.notAllowedAtRoot}}"
                                     label-position="right">
                         </umb-toggle>
                     </umb-control-group>
@@ -86,8 +86,8 @@
                         <umb-toggle checked="vm.allowAllTypes"
                                     on-click="vm.toggleAllowAllTypes()"
                                     show-labels="true"
-                                    label-on="Allow all types"
-                                    label-off="Allow chosen types"
+                                    label-on="{{vm.labels.allowAllTypes}}"
+                                    label-off="{{vm.labels.allowChosenTypes}}"
                                     label-position="right">
                         </umb-toggle>
 

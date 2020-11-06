@@ -4,7 +4,7 @@
 
     angular.module("umbraco")
         .controller("Our.Umbraco.Meganav.Dialogs.ItemTypeDialogController",
-            function ($scope, editorService, dialogHelper, contentTypeResource) {
+            function ($scope, editorService, dialogHelper, localizationHelper, contentTypeResource) {
 
                 var vm = this;
 
@@ -16,9 +16,21 @@
 
                 vm.allowAllTypes = !vm.itemType.allowedTypes || vm.itemType.allowedTypes.length <= 0;
 
+                vm.labels = {
+                    settings: "general_settings",
+                    permissions: "general_permissions",
+                    addIcon: "dialogs_addIcon",
+                    addSettingsType: "dialogs_addSettingsType",
+                    addView: "dialogs_addView",
+                    allowAllTypes: "general_allowAllTypes",
+                    allowChosenTypes: "general_allowChosenTypes",
+                    allowedAtRoot: "general_allowAtRoot",
+                    notAllowedAtRoot: "general_allowAtRoot"
+                };
+
                 vm.addIcon = function () {
                     editorService.iconPicker({
-                        title: "Choose icon",
+                        title: vm.labels.addIcon,
                         icon: vm.itemType.icon,
                         submit: function (model) {
                             vm.itemType.icon = model.icon;
@@ -36,7 +48,7 @@
 
                 vm.addSettingsType = function () {
                     dialogHelper.elementTypePicker({
-                        title: "Choose settings type",
+                        title: vm.labels.addSettingsType,
                         currentNode: vm.settingsElementType,
                         select: function (node) {
                             loadSettingsType(node.id)
@@ -57,7 +69,7 @@
 
                 vm.addView = function () {
                     dialogHelper.filePicker({
-                        title: "Choose view",
+                        title: vm.labels.addView,
                         extension: ".html",
                         select: function (node) {
                             vm.itemType.view = "/" + decodeURIComponent(node.id);
@@ -101,6 +113,8 @@
                 };
 
                 vm.$onInit = function () {
+                    localizationHelper.translate(vm.labels);
+
                     if (vm.itemType.settingsType) {
                         loadSettingsType(vm.itemType.settingsType);
                     }

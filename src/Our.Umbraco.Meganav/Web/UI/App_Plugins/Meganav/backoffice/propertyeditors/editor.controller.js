@@ -4,7 +4,7 @@
 
     angular.module("umbraco")
         .controller("Our.Umbraco.Meganav.PropertyEditors.EditorController",
-            function ($scope, $routeParams, overlayService, editorService, contentResource) {
+            function ($scope, $routeParams, overlayService, editorService, localizationHelper, contentResource) {
 
                 var vm = this;
 
@@ -13,6 +13,10 @@
                 vm.itemTypes = $scope.model.config.itemTypes || [];
 
                 vm.maxItems = $scope.model.config.maxItems;
+
+                vm.labels = {
+                    chooseType: "actions_chooseType"
+                };
 
                 vm.treeOptions = {
                     accept: function (source, dest) {
@@ -52,6 +56,8 @@
                 };
 
                 vm.$onInit = function () {
+                    localizationHelper.translate(vm.labels);
+
                     var setItemTypes = function (items) {
                         items.forEach(item => {
                             item.itemType = getItemType(item);
@@ -90,7 +96,7 @@
 
                 function openChooseType(allowedTypes, callback) {
                     overlayService.open({
-                        title: "Choose type",
+                        title: vm.labels.chooseType,
                         availableItems: allowedTypes,
                         filter: false,
                         view: "itempicker",

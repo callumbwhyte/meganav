@@ -14,6 +14,7 @@
     "/App_Plugins/Meganav/backoffice/dialogs/settingsDialog.link.controller.js",
     "/App_Plugins/Meganav/backoffice/dialogs/settingsDialog.settings.controller.js",
     "/App_Plugins/Meganav/backoffice/helpers/dialogHelper.service.js",
+    "/App_Plugins/Meganav/backoffice/helpers/localizationHelper.service.js",
     "/App_Plugins/Meganav/backoffice/propertyeditors/configuration.controller.js",
     "/App_Plugins/Meganav/backoffice/propertyeditors/editor.controller.js"
   ]

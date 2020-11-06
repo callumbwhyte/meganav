@@ -4,7 +4,7 @@
 
     angular.module("umbraco")
         .controller("Our.Umbraco.Meganav.Dialogs.SettingsDialogController",
-            function ($scope, overlayService) {
+            function ($scope, overlayService, localizationHelper) {
 
                 var vm = this;
 
@@ -14,6 +14,12 @@
                 vm.model = $scope.model;
 
                 vm.itemTypes = $scope.model.context.itemTypes;
+
+                vm.labels = {
+                    chooseType: "actions_chooseType",
+                    settings: "general_settings",
+                    link: "defaultdialogs_link"
+                };
 
                 vm.actionButtons = [];
 
@@ -55,6 +61,8 @@
                 };
 
                 vm.$onInit = function () {
+                    localizationHelper.translate(vm.labels);
+
                     if (vm.itemTypes.length > 1) {
                         vm.actionButtons.push(vm.changeTypeButton);
                     }
@@ -70,7 +78,7 @@
                 function loadTabs() {
                     vm.tabs = [
                         {
-                            name: "Link",
+                            name: vm.labels.link,
                             alias: "link",
                             icon: "icon-link",
                             view: "/App_Plugins/Meganav/backoffice/dialogs/settingsDialog.link.html",
@@ -80,7 +88,7 @@
 
                     if (vm.itemType && vm.itemType.settingsType) {
                         vm.tabs.push({
-                            name: "Settings",
+                            name: vm.labels.settings,
                             alias: "settings",
                             icon: "icon-settings",
                             view: "/App_Plugins/Meganav/backoffice/dialogs/settingsDialog.settings.html",
@@ -91,7 +99,7 @@
 
                 function openChooseType(callback) {
                     overlayService.open({
-                        title: "Choose type",
+                        title: vm.labels.chooseType,
                         availableItems: getAllowedTypes(),
                         filter: false,
                         view: "itempicker",

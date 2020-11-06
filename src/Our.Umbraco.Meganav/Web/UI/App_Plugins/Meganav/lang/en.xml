@@ -2,10 +2,25 @@
 <language alias="en" intName="English" localName="English" lcid="" culture="en">
   <area alias="actions">
     <key alias="changeType">Change type</key>
+    <key alias="chooseType">Select type</key>
     <key alias="collapseAll">Collapse all</key>
     <key alias="expandAll">Expand all</key>
     <key alias="populateContent">Populate from tree</key>
     <key alias="toggleCollapse">Toggle collapse</key>
     <key alias="toggleVisibility">Toggle visibility</key>
+  </area>
+  <area alias="dialogs">
+    <key alias="addIcon">Choose icon</key>
+    <key alias="addSettingsType">Choose settings type</key>
+    <key alias="addView">Choose view</key>
+  </area>
+  <area alias="general">
+    <key alias="allowAllTypes">Allow all types</key>
+    <key alias="allowAtRoot">Allow at root</key>
+    <key alias="allowChosenTypes">Allow chosen types</key>
+    <key alias="allowedTypes">Allowed Types</key>
+    <key alias="maxDepth">Max Depth</key>
+    <key alias="permissions">Permissions</key>
+    <key alias="settingsType">Settings Type</key>
   </area>
 </language>
