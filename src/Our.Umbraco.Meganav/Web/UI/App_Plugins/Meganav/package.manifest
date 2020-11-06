@@ -6,6 +6,7 @@
   "javascript": [
     "/App_Plugins/Meganav/lib/angular-ui-tree.min.js",
     "/App_Plugins/Meganav/backoffice/components/meganavActions.component.js",
+    "/App_Plugins/Meganav/backoffice/components/meganavAdd.component.js",
     "/App_Plugins/Meganav/backoffice/components/meganavItemType.component.js",
     "/App_Plugins/Meganav/backoffice/components/meganavPreview.component.js",
     "/App_Plugins/Meganav/backoffice/dialogs/itemTypeDialog.controller.js",

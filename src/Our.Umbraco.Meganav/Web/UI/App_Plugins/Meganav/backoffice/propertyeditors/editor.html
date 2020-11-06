@@ -11,6 +11,8 @@
     </button>
 
     <script type="text/ng-template" id="node.html">
+        <meganav-add on-add="vm.addItem($index, $parentNodeScope.item)"></meganav-add>
+
         <div class="meganav-item-wrapper">
             <div ng-include="item.itemType.view" ng-if="item.itemType && item.itemType.view"></div>
 

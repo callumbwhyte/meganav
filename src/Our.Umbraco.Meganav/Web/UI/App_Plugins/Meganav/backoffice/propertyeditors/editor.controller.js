@@ -20,10 +20,15 @@
                     }
                 };
 
-                vm.addItem = function (parentItem) {
+                vm.addItem = function (position, parentItem) {
                     var item = createItem();
                     var callback = function (model) {
-                        vm.items.push(model.value);
+                        var items = parentItem ? parentItem.children : vm.items;
+                        if (position > -1) {
+                            items.splice(position, 0, model.value);
+                        } else {
+                            items.push(model.value);
+                        }
                     };
                     var allowedTypes = getAllowedTypes(parentItem);
                     if (allowedTypes.length > 1) {
