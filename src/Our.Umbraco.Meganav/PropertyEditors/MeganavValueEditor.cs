@@ -70,7 +70,7 @@ namespace Our.Umbraco.Meganav.PropertyEditors
 
                     entity.Icon = content.ContentType.Icon;
 
-                    entity.Published = content.IsCulturePublished(culture) || content.Published;
+                    entity.Published = content.IsCulturePublished(culture ?? "") || content.Published;
 
                     entity.Url = umbracoContext?.Content.GetById(content.Id)?.Url(culture);
                 }
