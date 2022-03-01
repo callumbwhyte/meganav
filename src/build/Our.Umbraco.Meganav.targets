@@ -1,0 +1,23 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MeganavContentFilesPath>
+        $(MSBuildThisFileDirectory)..\content\App_Plugins\Meganav\**\*.*
+    </MeganavContentFilesPath>
+  </PropertyGroup>
+
+  <Target Name="CopyMeganavAssets" BeforeTargets="Build">
+    <ItemGroup>
+      <MeganavContentFiles Include="$(MeganavContentFilesPath)" />
+    </ItemGroup>
+    <Message Text="Copying Meganav files: $(MeganavContentFilesPath) - #@(MeganavContentFiles->Count()) files" Importance="high" />
+    <Copy SourceFiles="@(MeganavContentFiles)" DestinationFiles="@(MeganavContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\Meganav\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="ClearMeganavAssets" BeforeTargets="Clean">
+    <ItemGroup>
+      <MeganavDir Include="$(MSBuildProjectDirectory)\App_Plugins\Meganav\" />
+    </ItemGroup>
+    <Message Text="Clear old Meganav data" Importance="high" />
+    <RemoveDir Directories="@(MeganavDir)" />
+  </Target>
+</Project>

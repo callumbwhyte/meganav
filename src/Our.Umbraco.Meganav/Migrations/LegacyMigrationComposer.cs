@@ -1,15 +1,17 @@
-﻿using Umbraco.Core;
-using Umbraco.Core.Composing;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.DependencyInjection;
+using Umbraco.Cms.Core.Notifications;
 
 namespace Our.Umbraco.Meganav.Migrations
 {
-    public class LegacyMigrationComposer : IUserComposer
+    public class LegacyMigrationComposer : IComposer
     {
-        public void Compose(Composition composition)
+        public void Compose(IUmbracoBuilder builder)
         {
-            composition.Register<LegacyValueMigrator>();
+            builder.Services.AddTransient<LegacyValueMigrator>();
 
-            composition.Components().Append<LegacyMigrationComponent>();
+            builder.AddNotificationHandler<DataTypeSavingNotification, LegacyDataTypeChangingHandler>();
         }
     }
 }

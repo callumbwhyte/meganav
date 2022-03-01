@@ -1,22 +1,22 @@
-﻿using Umbraco.Core.Logging;
-using Umbraco.Core.PropertyEditors;
-using Umbraco.Core.Services;
+﻿using Umbraco.Cms.Core.IO;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.PropertyEditors;
 
 namespace Our.Umbraco.Meganav.PropertyEditors
 {
     [DataEditor(Constants.PropertyEditorAlias, Constants.PropertyEditorName, Group = "pickers")]
     internal class MeganavPropertyEditor : DataEditor
     {
-        private readonly IContentService _contentService;
+        private readonly IIOHelper _ioHelper;
 
-        public MeganavPropertyEditor(IContentService contentService, ILogger logger)
-            : base(logger, EditorType.PropertyValue)
+        public MeganavPropertyEditor(IDataValueEditorFactory dataValueEditorFactory, IIOHelper ioHelper)
+            : base(dataValueEditorFactory, EditorType.PropertyValue)
         {
-            _contentService = contentService;
+            _ioHelper = ioHelper;
         }
 
-        protected override IConfigurationEditor CreateConfigurationEditor() => new MeganavConfigurationEditor();
+        protected override IConfigurationEditor CreateConfigurationEditor() => new MeganavConfigurationEditor(_ioHelper);
 
-        protected override IDataValueEditor CreateValueEditor() => new MeganavValueEditor(_contentService);
+        protected override IDataValueEditor CreateValueEditor() => DataValueEditorFactory.Create<MeganavValueEditor>();
     }
 }

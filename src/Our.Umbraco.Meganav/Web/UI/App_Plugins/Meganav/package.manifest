@@ -1,6 +1,6 @@
 ﻿{
   "name": "Meganav",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "allowPackageTelemetry": true,
   "css": [
     "/App_Plugins/Meganav/lib/angular-ui-tree.min.css",

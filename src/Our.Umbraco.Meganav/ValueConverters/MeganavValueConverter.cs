@@ -5,23 +5,23 @@ using Newtonsoft.Json;
 using Our.Umbraco.Meganav.Models;
 using Our.Umbraco.Meganav.PropertyEditors;
 using Our.Umbraco.Meganav.PublishedContent;
-using Umbraco.Core;
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Core.PropertyEditors;
-using Umbraco.Web;
-using Umbraco.Web.Composing;
-using Umbraco.Web.PublishedCache;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.PropertyEditors;
+using Umbraco.Cms.Core.Web;
+using Umbraco.Extensions;
 
 namespace Our.Umbraco.Meganav.ValueConverters
 {
     internal class MeganavValueConverter : PropertyValueConverterBase
     {
+        private readonly IUmbracoContextFactory _umbracoContextFactory;
         private readonly PublishedElementFactory _publishedElementFactory;
 
         private MeganavConfiguration _config;
 
-        public MeganavValueConverter(PublishedElementFactory publishedElementFactory)
+        public MeganavValueConverter(IUmbracoContextFactory umbracoContextFactory, PublishedElementFactory publishedElementFactory)
         {
+            _umbracoContextFactory = umbracoContextFactory;
             _publishedElementFactory = publishedElementFactory;
         }
 
@@ -46,17 +46,20 @@ namespace Our.Umbraco.Meganav.ValueConverters
 
             var entities = JsonConvert.DeserializeObject<IEnumerable<MeganavEntity>>(value);
 
-            var items = BuildItems(Current.UmbracoContext, entities);
-
-            if (_config.MaxItems.HasValue == true)
+            using (var context = _umbracoContextFactory.EnsureUmbracoContext())
             {
-                return items.Take(_config.MaxItems.Value);
-            }
+                var items = BuildItems(context.UmbracoContext, entities);
 
-            return items;
+                if (_config.MaxItems.HasValue == true)
+                {
+                    return items.Take(_config.MaxItems.Value);
+                }
+
+                return items;
+            }
         }
 
-        private IEnumerable<MeganavItem> BuildItems(UmbracoContext umbracoContext, IEnumerable<MeganavEntity> entities, int level = 0)
+        private IEnumerable<MeganavItem> BuildItems(IUmbracoContext umbracoContext, IEnumerable<MeganavEntity> entities, int level = 0)
         {
             foreach (var entity in entities)
             {
@@ -88,14 +91,11 @@ namespace Our.Umbraco.Meganav.ValueConverters
 
                         if (itemType.SettingsType.HasValue && entity.Settings != null)
                         {
-                            if (umbracoContext?.Content is IPublishedCache2 publishedCache)
-                            {
-                                var contentType = publishedCache.GetContentType(itemType.SettingsType.Value);
+                            var contentType = umbracoContext.Content.GetContentType(itemType.SettingsType.Value);
 
-                                if (contentType?.IsElement == true)
-                                {
-                                    item.Settings = _publishedElementFactory.CreateElement(contentType, entity.Settings);
-                                }
+                            if (contentType?.IsElement == true)
+                            {
+                                item.Settings = _publishedElementFactory.CreateElement(contentType, entity.Settings);
                             }
                         }
 
@@ -108,9 +108,9 @@ namespace Our.Umbraco.Meganav.ValueConverters
 
                 if (entity.Udi != null)
                 {
-                    var culture = umbracoContext?.PublishedRequest?.Culture.Name;
+                    var culture = umbracoContext.PublishedRequest?.Culture;
 
-                    var content = umbracoContext?.Content.GetById(entity.Udi);
+                    var content = umbracoContext.Content.GetById(entity.Udi);
 
                     if (content == null)
                     {

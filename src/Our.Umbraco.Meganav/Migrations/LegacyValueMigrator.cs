@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Our.Umbraco.Meganav.Models;
-using Umbraco.Core;
-using Umbraco.Core.Logging;
-using Umbraco.Core.Models;
-using Umbraco.Core.Services;
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Services;
+using Umbraco.Extensions;
 
 namespace Our.Umbraco.Meganav.Migrations
 {
@@ -15,9 +16,9 @@ namespace Our.Umbraco.Meganav.Migrations
     {
         private readonly IContentTypeService _contentTypeService;
         private readonly IContentService _contentService;
-        private readonly ILogger _logger;
+        private readonly ILogger<LegacyValueMigrator> _logger;
 
-        public LegacyValueMigrator(IContentTypeService contentTypeService, IContentService contentService, ILogger logger)
+        public LegacyValueMigrator(IContentTypeService contentTypeService, IContentService contentService, ILogger<LegacyValueMigrator> logger)
         {
             _contentTypeService = contentTypeService;
             _contentService = contentService;
@@ -64,7 +65,7 @@ namespace Our.Umbraco.Meganav.Migrations
                         }
                         catch (Exception ex)
                         {
-                            _logger.Error<LegacyValueMigrator>(ex, "Failed to migrate Meganav values for {alias} on content {id}", property.Alias, content.Id);
+                            _logger.LogError(ex, "Failed to migrate Meganav values for {alias} on content {id}", property.Alias, content.Id);
                         }
                     }
                 }
@@ -98,12 +99,12 @@ namespace Our.Umbraco.Meganav.Migrations
 
                 var id = item.Value<int>("id");
 
-                GuidUdi.TryParse(item.Value<string>("udi"), out GuidUdi udi);
+                UdiParser.TryParse(item.Value<string>("udi"), out Udi udi);
 
-                if (id > 0 || udi?.Guid != Guid.Empty)
+                if (id > 0 || udi != null)
                 {
-                    var contentItem = udi != null
-                        ? _contentService.GetById(udi.Guid)
+                    var contentItem = udi is GuidUdi guidUdi
+                        ? _contentService.GetById(guidUdi.Guid)
                         : _contentService.GetById(id);
 
                     if (contentItem != null)

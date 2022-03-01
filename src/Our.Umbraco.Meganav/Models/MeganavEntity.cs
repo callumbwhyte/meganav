@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Umbraco.Core;
+using Umbraco.Cms.Core;
 
 namespace Our.Umbraco.Meganav.Models
 {

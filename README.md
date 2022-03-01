@@ -11,7 +11,7 @@ Click and drag an item to change it's position within the navigation; drop it wh
 
 ## Getting started
 
-This package is supported on Umbraco 8.7+.
+This package is supported on Umbraco 9+.
 
 ### Installation
 

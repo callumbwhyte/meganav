@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Our.Umbraco.Meganav.Models;
-using Umbraco.Core.Models.Editors;
-using Umbraco.Core.PropertyEditors;
+using Umbraco.Cms.Core.Models.Editors;
+using Umbraco.Cms.Core.PropertyEditors;
 
 namespace Our.Umbraco.Meganav.ValueReferences
 {

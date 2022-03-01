@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Umbraco.Core;
+using Umbraco.Cms.Core;
 
 namespace Our.Umbraco.Meganav.Models
 {

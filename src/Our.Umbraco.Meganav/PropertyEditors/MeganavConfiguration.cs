@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Our.Umbraco.Meganav.Models;
-using Umbraco.Core.PropertyEditors;
+using Umbraco.Cms.Core.PropertyEditors;
 
 namespace Our.Umbraco.Meganav.PropertyEditors
 {

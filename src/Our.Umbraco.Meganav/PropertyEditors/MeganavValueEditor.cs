@@ -2,28 +2,33 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Our.Umbraco.Meganav.Models;
-using Umbraco.Core.Models;
-using Umbraco.Core.Models.Editors;
-using Umbraco.Core.PropertyEditors;
-using Umbraco.Core.Services;
-using Umbraco.Web;
-using Umbraco.Web.Composing;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Models.Editors;
+using Umbraco.Cms.Core.PropertyEditors;
+using Umbraco.Cms.Core.Serialization;
+using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Strings;
+using Umbraco.Cms.Core.Web;
+using Umbraco.Extensions;
 
 namespace Our.Umbraco.Meganav.PropertyEditors
 {
     internal class MeganavValueEditor : DataValueEditor
     {
         private readonly IContentService _contentService;
+        private readonly IUmbracoContextFactory _umbracoContextFactory;
 
-        public MeganavValueEditor(IContentService contentService)
+        public MeganavValueEditor(IContentService contentService, IUmbracoContextFactory umbracoContextFactory, ILocalizedTextService localizedTextService, IShortStringHelper shortStringHelper, IJsonSerializer jsonSerializer)
+            : base(localizedTextService, shortStringHelper, jsonSerializer)
         {
             View = "/App_Plugins/Meganav/backoffice/propertyeditors/editor.html";
             ValueType = "JSON";
 
             _contentService = contentService;
+            _umbracoContextFactory = umbracoContextFactory;
         }
 
-        public override object ToEditor(Property property, IDataTypeService dataTypeService, string culture = null, string segment = null)
+        public override object ToEditor(IProperty property, string culture = null, string segment = null)
         {
             var data = property.GetValue(culture, segment);
 
@@ -34,7 +39,10 @@ namespace Our.Umbraco.Meganav.PropertyEditors
 
             var entities = JsonConvert.DeserializeObject<IEnumerable<MeganavEditorEntity>>(value);
 
-            EnrichEntities(Current.UmbracoContext, entities, culture);
+            using (var context = _umbracoContextFactory.EnsureUmbracoContext())
+            {
+                EnrichEntities(context.UmbracoContext, entities, culture);
+            }
 
             return entities;
         }
@@ -53,7 +61,7 @@ namespace Our.Umbraco.Meganav.PropertyEditors
             return JsonConvert.SerializeObject(entities);
         }
 
-        private void EnrichEntities(UmbracoContext umbracoContext, IEnumerable<MeganavEditorEntity> entities, string culture)
+        private void EnrichEntities(IUmbracoContext umbracoContext, IEnumerable<MeganavEditorEntity> entities, string culture)
         {
             foreach (var entity in entities)
             {
@@ -72,7 +80,7 @@ namespace Our.Umbraco.Meganav.PropertyEditors
 
                     entity.Published = content.IsCulturePublished(culture ?? "") || content.Published;
 
-                    entity.Url = umbracoContext?.Content.GetById(content.Id)?.Url(culture);
+                    entity.Url = umbracoContext.Content.GetById(content.Id)?.Url(culture);
                 }
 
                 if (entity.Children != null)
