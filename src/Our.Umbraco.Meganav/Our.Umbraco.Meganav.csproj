@@ -5,7 +5,7 @@
     <Version Condition="'$(BUILD_BUILDNUMBER)' != ''">$(BUILD_BUILDNUMBER)</Version>
     <Description>A flexible, draggable link picker for constructing site navigation menus in Umbraco</Description>
     <Authors>Callum Whyte</Authors>
-    <Copyright>Copyright © 2019 Callum Whyte, and other contributors</Copyright>
+    <Copyright>Copyright © 2022 Callum Whyte, and other contributors</Copyright>
     <PackageProjectUrl>https://github.com/callumbwhyte/meganav</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/callumbwhyte/meganav/blob/main/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/callumbwhyte/meganav</PackageProjectUrl>
@@ -16,6 +16,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="UmbracoCms.Web" Version="8.7.0" />
+    <Content Include="Web\UI\**\*.*" PackagePath="content" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="UmbracoCms.Web" Version="[8.7.0,9.0.0)" />
   </ItemGroup>
 </Project>

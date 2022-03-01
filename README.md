@@ -1,5 +1,7 @@
 # Umbraco Meganav
 
+<img src="docs/img/logo.png?raw=true" alt="Umbraco Meganav" width="250" align="right" />
+
 [![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.Meganav.svg)](https://www.nuget.org/packages/Our.Umbraco.Meganav/)
 [![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/packages/website-utilities/meganav/)
 
@@ -35,6 +37,8 @@ This project is maintained by [Callum Whyte](https://callumwhyte.com/) and contr
 
 ## Credits
 
+The Meganav logo uses the [Dropdown](https://thenounproject.com/term/dropdown/1678847/) icon from the [Noun Project](https://thenounproject.com) by [Andrejs Kirma](https://thenounproject.com/andrejs/), licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/).
+
 Meganav uses [Angular UI Tree](https://github.com/angular-ui-tree/angular-ui-tree) v2.22.5 (MIT license).
 
 ### A special #h5yr to our contributors
@@ -47,6 +51,6 @@ Meganav uses [Angular UI Tree](https://github.com/angular-ui-tree/angular-ui-tre
 
 ## License
 
-Copyright &copy; 2019 [Callum Whyte](https://callumwhyte.com/), and other contributors
+Copyright &copy; 2022 [Callum Whyte](https://callumwhyte.com/), and other contributors
 
 Licensed under the [MIT License](LICENSE.md).

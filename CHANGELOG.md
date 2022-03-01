@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.0.0] - 2022-03-01
+### Added
+* Initial release of Meganav for Umbraco 8.7+
+* Ability to create item types with Element Type settings, custom views, and permissions
+* Ability to toggle the visibility of nav items
+* Actions to expand / collapse Meganav, and populate with all nodes from the tree
+* UI overhaul with improved accessibility
+
 ## [1.1.2] - 2018-20-08
 ### Fixed
 * Nav item settings dialog not functioning in Umbraco v7.12
@@ -38,7 +46,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Meganav for Umbraco 7.5
 
-[Unreleased]: https://github.com/callumbwhyte/meganav/compare/release-1.1.2...HEAD
+[Unreleased]: https://github.com/callumbwhyte/meganav/compare/release-2.0.0...HEAD
+[2.0.0]: https://github.com/callumbwhyte/meganav/tree/release-2.0.0
 [1.1.2]: https://github.com/callumbwhyte/meganav/compare/release-1.1.1...release-1.1.2
 [1.1.1]: https://github.com/callumbwhyte/meganav/compare/release-1.1.0...release-1.1.1
 [1.1.0]: https://github.com/callumbwhyte/meganav/compare/release-1.0.0...release-1.1.0
