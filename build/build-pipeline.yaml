@@ -1,6 +1,5 @@
 pool:
-  name: Hosted VS2017
-  demands: msbuild
+  name: Hosted VS2019
 
 name: $(packageVersion)$(Rev:.r)
 
@@ -11,21 +10,21 @@ variables:
 trigger: none
 
 steps:
-- task: NuGetToolInstaller@1
-  displayName: 'Use latest NuGet'
-
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   displayName: 'Restore NuGet packages'
   inputs:
-    restoreSolution: '**\$(packageName).csproj'
+    command: 'restore'
+    projects: '**\$(packageName).csproj'
+    feedsToUse: 'select'
 
-- task: MSBuild@1
+- task: DotNetCoreCLI@2
   displayName: 'Build package'
   inputs:
-    solution: '**\$(packageName).csproj'
-    configuration: '$(buildConfiguration)'
-    msbuildArguments: '/p:Version=$(Build.BuildNumber) /p:PackageVersion=$(packageVersion) /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)\nuget'
-    clean: true
+    command: 'pack'
+    packagesToPack: '**\$(packageName).csproj'
+    packDirectory: '$(Build.ArtifactStagingDirectory)\nuget'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'packageVersion'
 
 - task: CopyFiles@2
   displayName: 'Copy package files'
