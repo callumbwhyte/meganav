@@ -7,6 +7,12 @@ variables:
 trigger: none
 
 steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET 5'
+  inputs:
+    packageType: 'sdk'
+    version: '5.0.0'
+
 - task: DotNetCoreCLI@2
   displayName: 'Restore NuGet packages'
   inputs:
