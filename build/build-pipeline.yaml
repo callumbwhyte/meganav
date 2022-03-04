@@ -11,7 +11,7 @@ steps:
   displayName: 'Restore NuGet packages'
   inputs:
     command: 'restore'
-    projects: '**\$(packageName).csproj'
+    projects: '**/*.csproj'
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
