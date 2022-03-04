@@ -18,7 +18,7 @@ steps:
   displayName: 'Build package'
   inputs:
     command: 'pack'
-    packagesToPack: '**\$(packageName).csproj'
+    packagesToPack: '**/*.csproj'
     packDirectory: '$(Build.ArtifactStagingDirectory)\nuget'
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'packageVersion'
