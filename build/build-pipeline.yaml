@@ -21,6 +21,12 @@ steps:
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '-p:Version:$(Build.BuildNumber) -p:PackageVersion=$(packageVersion) -p:PackageOutputPath=$(Build.ArtifactStagingDirectory)\nuget'
+
+- task: DotNetCoreCLI@2
   displayName: 'Build package'
   inputs:
     command: 'pack'
