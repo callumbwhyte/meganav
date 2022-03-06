@@ -165,7 +165,7 @@
 
                 function isAllowedType(item, parentItem) {
                     var allowedTypes = getAllowedTypes(parentItem);
-                    return allowedTypes.length == 0 || item.itemType == null || allowedTypes.some(x => x.id == item.itemType.id);
+                    return !allowedTypes.length || !item.itemType || allowedTypes.some(x => x.id == item.itemType.id);
                 }
 
                 function expandAll() {

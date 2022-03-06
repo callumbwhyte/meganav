@@ -116,7 +116,7 @@
                 }
 
                 function getAllowedTypes() {
-                    return vm.itemTypes.filter(x => x.id !== vm.itemType.id)
+                    return vm.itemTypes.filter(x => !vm.itemType || x.id !== vm.itemType.id)
                 }
 
             });
