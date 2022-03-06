@@ -5,6 +5,8 @@
 [![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.Meganav.svg)](https://www.nuget.org/packages/Our.Umbraco.Meganav/)
 [![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/packages/website-utilities/meganav/)
 
+_Looking for Meganav for **Umbraco 9**? Check the [v9/dev](https://github.com/callumbwhyte/meganav/tree/v9/dev) branch._
+
 Meganav is a flexible, draggable link picker for constructing site navigation menus in Umbraco.
 
 Click and drag an item to change it's position within the navigation; drop it wherever you choose. In the backoffice, the design of Meganav closely follows the other pickers in Umbraco to ensure your editor's experience is as familiar as possible.
