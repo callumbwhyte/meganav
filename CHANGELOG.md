@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [3.0.1] - 2022-03-06
+### Fixed
+* "Change type" dialog now shows on nav items with no item type assigned
+* Item types in the "Change type" dialog now default to using the link icon
+
 ## [3.0.0] - 2022-03-01
 ### Added
 * Initial release of Meganav for Umbraco 9+
@@ -11,6 +16,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 * Ability to toggle the visibility of nav items
 * Actions to expand / collapse Meganav, and populate with all nodes from the tree
 * UI overhaul with improved accessibility
+
+## [2.0.1] - 2022-03-06
+### Fixed
+* "Change type" dialog now shows on nav items with no item type assigned
+* Item types in the "Change type" dialog now default to using the link icon
 
 ## [2.0.0] - 2022-03-01
 ### Added
@@ -54,8 +64,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Meganav for Umbraco 7.5
 
-[Unreleased]: https://github.com/callumbwhyte/meganav/compare/release-3.0.0...HEAD
+[Unreleased]: https://github.com/callumbwhyte/meganav/compare/release-3.0.1...HEAD
+[3.0.1]: https://github.com/callumbwhyte/meganav/compare/release-3.0.0...release-3.0.1
 [3.0.0]: https://github.com/callumbwhyte/meganav/compare/release-2.0.0...release-3.0.0
+[2.0.1]: https://github.com/callumbwhyte/meganav/compare/release-2.0.0...release-2.0.1
 [2.0.0]: https://github.com/callumbwhyte/meganav/tree/release-2.0.0
 [1.1.2]: https://github.com/callumbwhyte/meganav/compare/release-1.1.1...release-1.1.2
 [1.1.1]: https://github.com/callumbwhyte/meganav/compare/release-1.1.0...release-1.1.1
