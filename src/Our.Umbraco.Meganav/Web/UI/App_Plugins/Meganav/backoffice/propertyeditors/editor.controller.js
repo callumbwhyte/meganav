@@ -185,14 +185,16 @@
                 function populateContent() {
                     contentResource.getChildren($routeParams.id, { cultureName: $scope.model.culture })
                         .then(result => {
-                            result.items.forEach(content => {
-                                contentResource.getNiceUrl(content.id)
-                                    .then(url => {
-                                        var item = createItem(content);
-                                        item.url = url;
-                                        vm.items.push(item);
-                                    });
-                            });
+                            if (result.items) {
+                                result.items.forEach(content => {
+                                    contentResource.getNiceUrl(content.id)
+                                        .then(url => {
+                                            var item = createItem(content);
+                                            item.url = url;
+                                            vm.items.push(item);
+                                        });
+                                });
+                            }
                         });
                 }
 
