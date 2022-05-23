@@ -58,12 +58,6 @@
                 vm.$onInit = function () {
                     localizationHelper.translate(vm.labels);
 
-                    vm.itemTypes.forEach(itemType => {
-                        if (!itemType.icon) {
-                            itemType.icon = "icon-link";
-                        }
-                    });
-
                     var setItemTypes = function (items) {
                         items.forEach(item => {
                             item.itemType = getItemType(item);
