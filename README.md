@@ -50,6 +50,7 @@ Meganav uses [Angular UI Tree](https://github.com/angular-ui-tree/angular-ui-tre
 * [Robin Neal](https://github.com/SudoCat)
 * [Lee Kelleher](https://github.com/leekelleher)
 * [Aaron Sadler](https://github.com/AaronSadlerUK)
+* [Matt Wootton](https://github.com/mattwootton)
 
 ## License
 
