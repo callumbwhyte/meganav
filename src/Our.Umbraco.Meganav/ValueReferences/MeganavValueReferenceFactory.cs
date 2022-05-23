@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Our.Umbraco.Meganav.Models;
 using Umbraco.Cms.Core.Models.Editors;
@@ -14,7 +15,12 @@ namespace Our.Umbraco.Meganav.ValueReferences
 
         public IEnumerable<UmbracoEntityReference> GetReferences(object value)
         {
-            var entities = JsonConvert.DeserializeObject<IEnumerable<MeganavEntity>>(value?.ToString());
+            if (!(value is string stringValue))
+            {
+                return Enumerable.Empty<UmbracoEntityReference>();
+            }
+
+            var entities = JsonConvert.DeserializeObject<IEnumerable<MeganavEntity>>(stringValue);
 
             return GetReferences(entities);
         }
