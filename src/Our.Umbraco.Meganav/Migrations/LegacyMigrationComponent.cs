@@ -35,7 +35,9 @@ namespace Our.Umbraco.Meganav.Migrations
                 {
                     var existingEntity = sender.GetDataType(x.Id);
 
-                    return existingEntity?.EditorAlias != Constants.PropertyEditorAlias && LegacyEditors.Aliases.Any(existingEntity.EditorAlias.InvariantContains);
+                    return existingEntity != null
+                        && existingEntity.EditorAlias != Constants.PropertyEditorAlias
+                        && LegacyEditors.Aliases.Any(existingEntity.EditorAlias.InvariantContains);
                 });
 
             foreach (var dataType in dataTypes)
