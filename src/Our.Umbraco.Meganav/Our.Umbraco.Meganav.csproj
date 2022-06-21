@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <Version Condition="'$(BUILD_BUILDNUMBER)' == ''">1.0.0.0</Version>
     <Version Condition="'$(BUILD_BUILDNUMBER)' != ''">$(BUILD_BUILDNUMBER)</Version>
     <Description>A flexible, draggable link picker for constructing site navigation menus in Umbraco</Description>
@@ -19,7 +19,10 @@
     <Content Include="Web\UI\**\*.*" Pack="true" PackagePath="content" />
     <None Include="..\build\**\*.*" Pack="true" PackagePath="buildTransitive" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
     <PackageReference Include="Umbraco.Cms.Web.Common" Version="[9.0.0,10.0.0)" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' != 'net5.0' ">
+    <PackageReference Include="Umbraco.Cms.Web.Common" Version="[9.0.0,11.0.0)" />
   </ItemGroup>
 </Project>
