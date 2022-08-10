@@ -13,6 +13,8 @@ namespace Our.Umbraco.Meganav.Composing
             builder.Services.AddTransient<PublishedElementFactory>();
 
             builder.DataValueReferenceFactories().Append<MeganavValueReferenceFactory>();
+
+            builder.ManifestFilters().Append<MeganavManifestFilter>();
         }
     }
 }

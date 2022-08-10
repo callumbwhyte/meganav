@@ -1,25 +1,35 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <Version Condition="'$(BUILD_BUILDNUMBER)' == ''">1.0.0.0</Version>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <Version Condition="'$(BUILD_BUILDNUMBER)' == ''">1.0.0</Version>
     <Version Condition="'$(BUILD_BUILDNUMBER)' != ''">$(BUILD_BUILDNUMBER)</Version>
     <Description>A flexible, draggable link picker for constructing site navigation menus in Umbraco</Description>
     <Authors>Callum Whyte</Authors>
     <Copyright>Copyright © 2022 Callum Whyte, and other contributors</Copyright>
     <PackageProjectUrl>https://github.com/callumbwhyte/meganav</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/callumbwhyte/meganav/blob/main/LICENSE.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/callumbwhyte/meganav</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/meganav/main/docs/img/logo.png</PackageIconUrl>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <RepositoryUrl>https://github.com/callumbwhyte/meganav</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>umbraco meganav navigation menu</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <StaticWebAssetBasePath>App_Plugins/Meganav</StaticWebAssetBasePath>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="Web\UI\**\*.*" Pack="true" PackagePath="content" />
-    <None Include="..\build\**\*.*" Pack="true" PackagePath="buildTransitive" />
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\docs\img\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Web.Common" Version="[9.0.0,10.0.0)" />
+    <PackageReference Include="Umbraco.Cms.Web.Common" Version="[10.0.0,13.0.0)" />
   </ItemGroup>
 </Project>
