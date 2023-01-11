@@ -5,6 +5,7 @@ using Our.Umbraco.Meganav.Models;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.Editors;
 using Umbraco.Cms.Core.PropertyEditors;
+using Umbraco.Cms.Core.Routing;
 using Umbraco.Cms.Core.Serialization;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Strings;
@@ -16,15 +17,17 @@ namespace Our.Umbraco.Meganav.PropertyEditors
     internal class MeganavValueEditor : DataValueEditor
     {
         private readonly IContentService _contentService;
+        private readonly IPublishedUrlProvider _publishedUrlProvider;
         private readonly IUmbracoContextFactory _umbracoContextFactory;
 
-        public MeganavValueEditor(IContentService contentService, IUmbracoContextFactory umbracoContextFactory, ILocalizedTextService localizedTextService, IShortStringHelper shortStringHelper, IJsonSerializer jsonSerializer)
+        public MeganavValueEditor(IContentService contentService, IPublishedUrlProvider publishedUrlProvider, IUmbracoContextFactory umbracoContextFactory, ILocalizedTextService localizedTextService, IShortStringHelper shortStringHelper, IJsonSerializer jsonSerializer)
             : base(localizedTextService, shortStringHelper, jsonSerializer)
         {
             View = "/App_Plugins/Meganav/backoffice/propertyeditors/editor.html";
             ValueType = "JSON";
 
             _contentService = contentService;
+            _publishedUrlProvider = publishedUrlProvider;
             _umbracoContextFactory = umbracoContextFactory;
         }
 
@@ -80,7 +83,7 @@ namespace Our.Umbraco.Meganav.PropertyEditors
 
                     entity.Published = content.IsCulturePublished(culture ?? "") || content.Published;
 
-                    entity.Url = umbracoContext.Content.GetById(content.Id)?.Url(culture);
+                    entity.Url = umbracoContext.Content.GetById(content.Id)?.Url(_publishedUrlProvider, culture);
                 }
 
                 if (entity.Children != null)

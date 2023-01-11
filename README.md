@@ -13,19 +13,17 @@ Click and drag an item to change it's position within the navigation; drop it wh
 
 ## Getting started
 
-This package is supported on Umbraco 9+.
+This package is supported on Umbraco v9, v10, and v11
 
 ### Installation
 
-Meganav is available from Our Umbraco, NuGet, or as a manual download directly from GitHub.
+Meganav is available via [NuGet](https://www.nuget.org/packages/Our.Umbraco.Meganav/).
 
-#### Our Umbraco repository
+To install with the .NET CLI, run the following command:
 
-You can find a downloadable package on the [Our Umbraco](https://our.umbraco.com/packages/website-utilities/meganav/) site.
+    $ dotnet add package Our.Umbraco.Meganav
 
-#### NuGet package repository
-
-To [install from NuGet](https://www.nuget.org/packages/Our.Umbraco.Meganav/), run the following command in your instance of Visual Studio.
+To install from within Visual Studio, use the NuGet Package Manager UI or run the following command:
 
     PM> Install-Package Our.Umbraco.Meganav
 

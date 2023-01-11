@@ -7,6 +7,7 @@ using Our.Umbraco.Meganav.PropertyEditors;
 using Our.Umbraco.Meganav.PublishedContent;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.PropertyEditors;
+using Umbraco.Cms.Core.Routing;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Extensions;
 
@@ -14,13 +15,17 @@ namespace Our.Umbraco.Meganav.ValueConverters
 {
     internal class MeganavValueConverter : PropertyValueConverterBase
     {
+        private readonly IPublishedUrlProvider _publishedUrlProvider;
+        private readonly IVariationContextAccessor _variationContextAccessor;
         private readonly IUmbracoContextFactory _umbracoContextFactory;
         private readonly PublishedElementFactory _publishedElementFactory;
 
         private MeganavConfiguration _config;
 
-        public MeganavValueConverter(IUmbracoContextFactory umbracoContextFactory, PublishedElementFactory publishedElementFactory)
+        public MeganavValueConverter(IPublishedUrlProvider publishedUrlProvider, IVariationContextAccessor variationContextAccessor, IUmbracoContextFactory umbracoContextFactory, PublishedElementFactory publishedElementFactory)
         {
+            _publishedUrlProvider = publishedUrlProvider;
+            _variationContextAccessor = variationContextAccessor;
             _umbracoContextFactory = umbracoContextFactory;
             _publishedElementFactory = publishedElementFactory;
         }
@@ -119,10 +124,10 @@ namespace Our.Umbraco.Meganav.ValueConverters
 
                     if (string.IsNullOrWhiteSpace(entity.Title) == true)
                     {
-                        item.Title = content.Name(culture);
+                        item.Title = content.Name(_variationContextAccessor, culture);
                     }
 
-                    item.Url = content.Url(culture);
+                    item.Url = content.Url(_publishedUrlProvider, culture);
 
                     item.Content = content;
                 }
