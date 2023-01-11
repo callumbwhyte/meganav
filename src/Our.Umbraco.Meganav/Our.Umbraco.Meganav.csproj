@@ -5,7 +5,7 @@
     <Version Condition="'$(BUILD_BUILDNUMBER)' != ''">$(BUILD_BUILDNUMBER)</Version>
     <Description>A flexible, draggable link picker for constructing site navigation menus in Umbraco</Description>
     <Authors>Callum Whyte</Authors>
-    <Copyright>Copyright © 2022 Callum Whyte, and other contributors</Copyright>
+    <Copyright>Copyright © 2023 Callum Whyte, and other contributors</Copyright>
     <PackageIcon>docs\logo.png</PackageIcon>
     <PackageLicenseFile>docs\LICENSE.md</PackageLicenseFile>
     <PackageReadmeFile>docs\README.md</PackageReadmeFile>

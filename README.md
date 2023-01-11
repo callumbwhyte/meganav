@@ -3,7 +3,6 @@
 <img src="docs/img/logo.png?raw=true" alt="Umbraco Meganav" width="250" align="right" />
 
 [![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.Meganav.svg)](https://www.nuget.org/packages/Our.Umbraco.Meganav/)
-[![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/packages/website-utilities/meganav/)
 
 _Looking for Meganav for **Umbraco 8**? Check the [v8/dev](https://github.com/callumbwhyte/meganav/tree/v8/dev) branch._
 
@@ -52,6 +51,6 @@ Meganav uses [Angular UI Tree](https://github.com/angular-ui-tree/angular-ui-tre
 
 ## License
 
-Copyright &copy; 2022 [Callum Whyte](https://callumwhyte.com/), and other contributors
+Copyright &copy; 2023 [Callum Whyte](https://callumwhyte.com/), and other contributors
 
 Licensed under the [MIT License](LICENSE.md).

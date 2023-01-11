@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [4.0.0] - 2023-01-11
+### Added
+* Initial release of SuperValueConverters for Umbraco v9, v10 (LTS), and v11
+
 ## [3.0.3] - 2022-05-27
 ### Fixed
 * Unable to create new Meganav properties due to null data type
@@ -86,7 +90,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Meganav for Umbraco 7.5
 
-[Unreleased]: https://github.com/callumbwhyte/meganav/compare/release-3.0.3...HEAD
+[Unreleased]: https://github.com/callumbwhyte/meganav/compare/release-4.0.0...HEAD
+[4.0.0]: https://github.com/callumbwhyte/meganav/compare/release-3.0.3...release-4.0.0
 [3.0.3]: https://github.com/callumbwhyte/meganav/compare/release-3.0.2...release-3.0.3
 [3.0.2]: https://github.com/callumbwhyte/meganav/compare/release-3.0.1...release-3.0.2
 [3.0.1]: https://github.com/callumbwhyte/meganav/compare/release-3.0.0...release-3.0.1
