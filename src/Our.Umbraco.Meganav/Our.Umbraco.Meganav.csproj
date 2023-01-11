@@ -6,18 +6,21 @@
     <Description>A flexible, draggable link picker for constructing site navigation menus in Umbraco</Description>
     <Authors>Callum Whyte</Authors>
     <Copyright>Copyright © 2022 Callum Whyte, and other contributors</Copyright>
+    <PackageIcon>docs\logo.png</PackageIcon>
+    <PackageLicenseFile>docs\LICENSE.md</PackageLicenseFile>
+    <PackageReadmeFile>docs\README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/callumbwhyte/meganav</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/callumbwhyte/meganav/blob/main/LICENSE.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/callumbwhyte/meganav</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/meganav/main/docs/img/logo.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/callumbwhyte/meganav</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>umbraco meganav navigation menu</PackageTags>
+    <PackageTags>umbraco meganav navigation menu umbraco-marketplace</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Web\UI\**\*.*" Pack="true" PackagePath="content" />
     <None Include="..\build\**\*.*" Pack="true" PackagePath="buildTransitive" />
+    <None Include="..\..\LICENSE.md" Pack="true" PackagePath="docs" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="docs" />
+    <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="docs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Umbraco.Cms.Web.Common" Version="[9.0.0,10.0.0)" />

@@ -1,0 +1,16 @@
+{
+  "Title": "Meganav",
+  "Description": "A flexible, draggable link picker for constructing site navigation menus in Umbraco",
+  "Category": "Editor Tools",
+  "Tags": [ "Meganav", "Navigation", "Menu" ],
+  "LicenseTypes": [ "Free" ],
+  "PackageType": "Package",
+  "AuthorDetails": {
+    "Name": "Callum Whyte",
+    "Url": "https://www.callumwhyte.com/",
+    "ImageUrl": "https://github.com/callumbwhyte.png",
+    "SyncContributorsFromRepository": true
+  },
+  "DocumentationUrl": "https://github.com/callumbwhyte/meganav",
+  "IssueTrackerUrl": "https://github.com/callumbwhyte/meganav/issues"
+}
