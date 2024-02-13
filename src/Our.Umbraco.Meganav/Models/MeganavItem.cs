@@ -13,7 +13,10 @@ namespace Our.Umbraco.Meganav.Models
         [DataMember(Name = "url")]
         public string Url { get; set; }
 
-        [DataMember(Name = "target")]
+		[DataMember(Name = "querystring")]
+		public string QueryString { get; set; }
+
+		[DataMember(Name = "target")]
         public string Target { get; set; }
 
         [DataMember(Name = "level")]
@@ -31,6 +34,6 @@ namespace Our.Umbraco.Meganav.Models
         [DataMember(Name = "children")]
         public IEnumerable<MeganavItem> Children { get; set; } = new List<MeganavItem>();
 
-        IEnumerable<IMeganavItem> IMeganavItem.Children => Children;
+		IEnumerable<IMeganavItem> IMeganavItem.Children => Children;
     }
 }

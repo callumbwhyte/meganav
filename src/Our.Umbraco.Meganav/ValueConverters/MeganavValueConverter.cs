@@ -5,25 +5,41 @@ using Newtonsoft.Json;
 using Our.Umbraco.Meganav.Models;
 using Our.Umbraco.Meganav.PropertyEditors;
 using Our.Umbraco.Meganav.PublishedContent;
+using Umbraco.Cms.Core.DeliveryApi;
+using Umbraco.Cms.Core.Logging;
+using Umbraco.Cms.Core.Models.DeliveryApi;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.PropertyEditors;
+using Umbraco.Cms.Core.PropertyEditors.DeliveryApi;
+using Umbraco.Cms.Core.PublishedCache;
 using Umbraco.Cms.Core.Routing;
+using Umbraco.Cms.Core.Serialization;
 using Umbraco.Cms.Core.Web;
+using Umbraco.Cms.Core;
 using Umbraco.Extensions;
+using static Umbraco.Cms.Core.Constants;
 
 namespace Our.Umbraco.Meganav.ValueConverters
 {
-    internal class MeganavValueConverter : PropertyValueConverterBase
-    {
-        private readonly IPublishedUrlProvider _publishedUrlProvider;
-        private readonly IVariationContextAccessor _variationContextAccessor;
-        private readonly IUmbracoContextFactory _umbracoContextFactory;
-        private readonly PublishedElementFactory _publishedElementFactory;
+    internal class MeganavValueConverter : PropertyValueConverterBase, IDeliveryApiPropertyValueConverter
+	{
+		private readonly IPublishedSnapshotAccessor _publishedSnapshotAccessor;
+		private readonly IApiContentNameProvider _apiContentNameProvider;
+		private readonly IApiContentRouteBuilder _apiContentRouteBuilder;
+		private readonly IPublishedUrlProvider _publishedUrlProvider;
+		private readonly IVariationContextAccessor _variationContextAccessor;
+		private readonly IUmbracoContextFactory _umbracoContextFactory;
+		private readonly PublishedElementFactory _publishedElementFactory;
 
-        private MeganavConfiguration _config;
 
-        public MeganavValueConverter(IPublishedUrlProvider publishedUrlProvider, IVariationContextAccessor variationContextAccessor, IUmbracoContextFactory umbracoContextFactory, PublishedElementFactory publishedElementFactory)
+		private MeganavConfiguration _config;
+
+        public MeganavValueConverter(IPublishedSnapshotAccessor publishedSnapshotAccessor, IApiContentNameProvider apiContentNameProvider, IApiContentRouteBuilder apiContentRouteBuilder, IPublishedUrlProvider publishedUrlProvider, IVariationContextAccessor variationContextAccessor, IUmbracoContextFactory umbracoContextFactory, PublishedElementFactory publishedElementFactory)
         {
+            _publishedSnapshotAccessor  = publishedSnapshotAccessor;
+            _apiContentNameProvider = apiContentNameProvider;
+            _apiContentRouteBuilder = apiContentRouteBuilder;
+            _publishedElementFactory = publishedElementFactory;
             _publishedUrlProvider = publishedUrlProvider;
             _variationContextAccessor = variationContextAccessor;
             _umbracoContextFactory = umbracoContextFactory;
@@ -76,7 +92,8 @@ namespace Our.Umbraco.Meganav.ValueConverters
                 var item = new MeganavItem
                 {
                     Title = entity.Title,
-                    Url = entity.Url,
+                    Url = $"{entity.Url}{entity.QueryString}",
+                    QueryString = entity.QueryString,
                     Target = entity.Target,
                     Level = level
                 };
@@ -148,5 +165,55 @@ namespace Our.Umbraco.Meganav.ValueConverters
                 _config = propertyType.DataType.ConfigurationAs<MeganavConfiguration>();
             }
         }
-    }
+
+		public PropertyCacheLevel GetDeliveryApiPropertyCacheLevel(IPublishedPropertyType propertyType) => PropertyCacheLevel.Elements;
+
+		public Type GetDeliveryApiPropertyValueType(IPublishedPropertyType propertyType) => typeof(IEnumerable<MeganavApiItem>);
+
+		public object ConvertIntermediateToDeliveryApiObject(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview, bool expanding)
+		{
+
+			IEnumerable<MeganavApiItem> DefaultValue() => Array.Empty<MeganavApiItem>();
+
+			if (inter is not string value || value.IsNullOrWhiteSpace())
+			{
+				return DefaultValue();
+			}
+
+			var entities = JsonConvert.DeserializeObject<IEnumerable<MeganavEntity>>(value);
+			if (entities == null || entities.Any() == false)
+			{
+				return DefaultValue();
+			}
+
+			IPublishedSnapshot publishedSnapshot = _publishedSnapshotAccessor.GetRequiredPublishedSnapshot();
+
+			MeganavApiItem? BuildApiItems(IMeganavEntity item, int level)
+			{
+				switch (item.Udi?.EntityType)
+				{
+					case UdiEntityType.Document:
+						IPublishedContent? content = publishedSnapshot.Content?.GetById(item.Udi.Guid);
+                        IApiContentRoute? route = content != null ? _apiContentRouteBuilder.Build(content) : null;
+					    return content == null || route == null
+                            ? null
+                            : MeganavApiItem.Content(
+                                item.Title.IfNullOrWhiteSpace(_apiContentNameProvider.GetName(content)),
+                                item.QueryString,
+                                item.Target,
+                                content.Key,
+                                content.ContentType.Alias,
+                                route, 
+                                level,
+                                item.Children.Select(entity => BuildApiItems(entity, level + 1)).WhereNotNull().ToArray());
+					default:
+						return MeganavApiItem.External(item.Title, $"{item.Url}{item.QueryString}", item.QueryString, item.Target, level, item.Children.Select(entity => BuildApiItems(entity, level + 1)).WhereNotNull().ToArray());
+				}
+
+			}
+
+			return entities.Select(entity => BuildApiItems(entity, 0)).WhereNotNull().ToArray();
+
+		}
+	}
 }

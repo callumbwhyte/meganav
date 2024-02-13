@@ -137,6 +137,7 @@
                         name: item.name,
                         title: item.title,
                         url: item.url,
+                        querystring: item.querystring,
                         target: item.target,
                         icon: item.icon,
                         udi: item.udi,
