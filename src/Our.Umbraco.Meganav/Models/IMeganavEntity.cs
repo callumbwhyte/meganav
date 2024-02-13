@@ -10,6 +10,8 @@ namespace Our.Umbraco.Meganav.Models
 
         string Url { get; }
 
+        string QueryString { get; }
+
         string Target { get; }
 
         bool Visible { get; }

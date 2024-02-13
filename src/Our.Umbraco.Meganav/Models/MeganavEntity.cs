@@ -14,7 +14,10 @@ namespace Our.Umbraco.Meganav.Models
         [DataMember(Name = "url")]
         public string Url { get; set; }
 
-        [DataMember(Name = "target")]
+		[DataMember(Name = "queryString")]
+		public string QueryString { get; set; }
+
+		[DataMember(Name = "target")]
         public string Target { get; set; }
 
         [DataMember(Name = "visible")]
