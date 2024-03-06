@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -190,26 +190,29 @@ namespace Our.Umbraco.Meganav.ValueConverters
 
 			MeganavApiItem? BuildApiItems(IMeganavEntity item, int level)
 			{
-				switch (item.Udi?.EntityType)
-				{
-					case UdiEntityType.Document:
-						IPublishedContent? content = publishedSnapshot.Content?.GetById(item.Udi.Guid);
-                        IApiContentRoute? route = content != null ? _apiContentRouteBuilder.Build(content) : null;
-					    return content == null || route == null
-                            ? null
-                            : MeganavApiItem.Content(
-                                item.Title.IfNullOrWhiteSpace(_apiContentNameProvider.GetName(content)),
-                                item.QueryString,
-                                item.Target,
-                                content.Key,
-                                content.ContentType.Alias,
-                                route, 
-                                level,
-                                item.Children.Select(entity => BuildApiItems(entity, level + 1)).WhereNotNull().ToArray());
-					default:
-						return MeganavApiItem.External(item.Title, $"{item.Url}{item.QueryString}", item.QueryString, item.Target, level, item.Children.Select(entity => BuildApiItems(entity, level + 1)).WhereNotNull().ToArray());
-				}
-
+                if (item.Visible)
+                {
+                    switch (item.Udi?.EntityType)
+                    {
+                        case UdiEntityType.Document:
+                            IPublishedContent? content = publishedSnapshot.Content?.GetById(item.Udi.Guid);
+                            IApiContentRoute? route = content != null ? _apiContentRouteBuilder.Build(content) : null;
+                            return content == null || route == null
+                                ? null
+                                : MeganavApiItem.Content(
+                                    item.Title.IfNullOrWhiteSpace(_apiContentNameProvider.GetName(content)),
+                                    item.QueryString,
+                                    item.Target,
+                                    content.Key,
+                                    content.ContentType.Alias,
+                                    route,
+                                    level,
+                                    item.Children.Select(entity => BuildApiItems(entity, level + 1)).WhereNotNull().ToArray());
+                        default:
+                            return MeganavApiItem.External(item.Title, $"{item.Url}{item.QueryString}", item.QueryString, item.Target, level, item.Children.Select(entity => BuildApiItems(entity, level + 1)).WhereNotNull().ToArray());
+                    }
+                }
+                return null;
 			}
 
 			return entities.Select(entity => BuildApiItems(entity, 0)).WhereNotNull().ToArray();
