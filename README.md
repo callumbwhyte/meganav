@@ -12,7 +12,7 @@ Click and drag an item to change it's position within the navigation; drop it wh
 
 ## Getting started
 
-This package is supported on Umbraco v9, v10, and v11
+This package is supported on Umbraco v10-v12 and v13
 
 ### Installation
 
@@ -48,9 +48,10 @@ Meganav uses [Angular UI Tree](https://github.com/angular-ui-tree/angular-ui-tre
 * [Lee Kelleher](https://github.com/leekelleher)
 * [Aaron Sadler](https://github.com/AaronSadlerUK)
 * [Matt Wootton](https://github.com/mattwootton)
+* [Richard Ockerby](https://github.com/Rockerby)
 
 ## License
 
-Copyright &copy; 2023 [Callum Whyte](https://callumwhyte.com/), and other contributors
+Copyright &copy; 2024 [Callum Whyte](https://callumwhyte.com/), and other contributors
 
 Licensed under the [MIT License](LICENSE.md).
