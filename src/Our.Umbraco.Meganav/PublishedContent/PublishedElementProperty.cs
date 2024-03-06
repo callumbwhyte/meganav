@@ -26,6 +26,8 @@ namespace Our.Umbraco.Meganav.PublishedContent
 
         public object GetSourceValue(string culture = null, string segment = null) => _sourceValue.Value;
 
+        public object GetDeliveryApiValue(bool expanding, string culture = null, string segment = null) => _objectValue.Value;
+
         public object GetValue(string culture = null, string segment = null) => _objectValue.Value;
 
         public object GetXPathValue(string culture = null, string segment = null) => _xpathValue.Value;
